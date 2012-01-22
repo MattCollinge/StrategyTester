@@ -1,0 +1,5 @@
+C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries\bin\Debug\StrategyTester.TimeSeries.dll
+C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries\bin\Debug\StrategyTester.TimeSeries.pdb
+C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries\obj\Debug\ResolveAssemblyReference.cache
+C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries\obj\Debug\StrategyTester.TimeSeries.dll
+C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries\obj\Debug\StrategyTester.TimeSeries.pdb

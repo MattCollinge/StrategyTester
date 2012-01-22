@@ -1,0 +1,11 @@
+C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries.Tests\obj\Debug\ResolveAssemblyReference.cache
+C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries.Tests\bin\Debug\StrategyTester.TimeSeries.Tests.dll
+C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries.Tests\bin\Debug\StrategyTester.TimeSeries.Tests.pdb
+C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries.Tests\bin\Debug\nunit.framework.dll
+C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries.Tests\bin\Debug\nunit.mocks.dll
+C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries.Tests\bin\Debug\pnunit.framework.dll
+C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries.Tests\bin\Debug\StrategyTester.TimeSeries.dll
+C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries.Tests\bin\Debug\StrategyTester.TimeSeries.pdb
+C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries.Tests\bin\Debug\nunit.framework.xml
+C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries.Tests\obj\Debug\StrategyTester.TimeSeries.Tests.dll
+C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries.Tests\obj\Debug\StrategyTester.TimeSeries.Tests.pdb
