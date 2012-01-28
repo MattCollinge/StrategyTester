@@ -9,3 +9,6 @@ C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries.Tests
 C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries.Tests\bin\Debug\nunit.framework.xml
 C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries.Tests\obj\Debug\StrategyTester.TimeSeries.Tests.dll
 C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries.Tests\obj\Debug\StrategyTester.TimeSeries.Tests.pdb
+C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries.Tests\bin\Debug\Rhino.Mocks.dll
+C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries.Tests\bin\Debug\Ionic.Zip.dll
+C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries.Tests\bin\Debug\Ionic.Zip.xml

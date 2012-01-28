@@ -3,3 +3,11 @@ C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries\bin\D
 C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries\obj\Debug\ResolveAssemblyReference.cache
 C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries\obj\Debug\StrategyTester.TimeSeries.dll
 C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries\obj\Debug\StrategyTester.TimeSeries.pdb
+C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries\bin\Debug\MongoDB.Bson.dll
+C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries\bin\Debug\MongoDB.Driver.dll
+C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries\bin\Debug\MongoDB.Bson.pdb
+C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries\bin\Debug\MongoDB.Bson.xml
+C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries\bin\Debug\MongoDB.Driver.pdb
+C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries\bin\Debug\MongoDB.Driver.xml
+C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries\bin\Debug\Ionic.Zip.dll
+C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries\bin\Debug\Ionic.Zip.xml

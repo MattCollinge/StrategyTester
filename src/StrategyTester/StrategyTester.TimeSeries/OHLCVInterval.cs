@@ -7,6 +7,7 @@ namespace StrategyTester.TimeSeries
 {
     public class OHLCVInterval
     {
+        public string Id { get; set; }
         public DateTime DateTime { get; set; }
         public double Open { get; set; }
         public double High { get; set; }
@@ -18,5 +19,7 @@ namespace StrategyTester.TimeSeries
         public int Index { get; set; }
         public string Interval { get; set; }
         public string Instrument { get; set; }
+        public string DataSource { get; set; }
+        public string Key { get { return String.Format("{0}{1}", Instrument, DateTime); } }
     }
 }
