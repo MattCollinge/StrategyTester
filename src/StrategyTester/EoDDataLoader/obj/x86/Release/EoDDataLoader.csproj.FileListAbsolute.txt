@@ -1,0 +1,9 @@
+C:\Dev\Trading\StrategyTester\src\StrategyTester\EoDDataLoader\bin\Release\EoDDataLoader.exe
+C:\Dev\Trading\StrategyTester\src\StrategyTester\EoDDataLoader\bin\Release\EoDDataLoader.pdb
+C:\Dev\Trading\StrategyTester\src\StrategyTester\EoDDataLoader\bin\Release\StrategyTester.TimeSeries.dll
+C:\Dev\Trading\StrategyTester\src\StrategyTester\EoDDataLoader\bin\Release\Ionic.Zip.dll
+C:\Dev\Trading\StrategyTester\src\StrategyTester\EoDDataLoader\bin\Release\StrategyTester.TimeSeries.pdb
+C:\Dev\Trading\StrategyTester\src\StrategyTester\EoDDataLoader\bin\Release\Ionic.Zip.xml
+C:\Dev\Trading\StrategyTester\src\StrategyTester\EoDDataLoader\obj\x86\Release\ResolveAssemblyReference.cache
+C:\Dev\Trading\StrategyTester\src\StrategyTester\EoDDataLoader\obj\x86\Release\EoDDataLoader.exe
+C:\Dev\Trading\StrategyTester\src\StrategyTester\EoDDataLoader\obj\x86\Release\EoDDataLoader.pdb

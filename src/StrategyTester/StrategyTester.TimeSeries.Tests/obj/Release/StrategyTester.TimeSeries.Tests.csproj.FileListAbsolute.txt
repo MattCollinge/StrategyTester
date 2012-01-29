@@ -1,0 +1,14 @@
+C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries.Tests\bin\Release\StrategyTester.TimeSeries.Tests.dll
+C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries.Tests\bin\Release\StrategyTester.TimeSeries.Tests.pdb
+C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries.Tests\bin\Release\nunit.framework.dll
+C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries.Tests\bin\Release\nunit.mocks.dll
+C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries.Tests\bin\Release\pnunit.framework.dll
+C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries.Tests\bin\Release\Rhino.Mocks.dll
+C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries.Tests\bin\Release\StrategyTester.TimeSeries.dll
+C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries.Tests\bin\Release\Ionic.Zip.dll
+C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries.Tests\bin\Release\StrategyTester.TimeSeries.pdb
+C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries.Tests\bin\Release\nunit.framework.xml
+C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries.Tests\bin\Release\Ionic.Zip.xml
+C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries.Tests\obj\Release\ResolveAssemblyReference.cache
+C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries.Tests\obj\Release\StrategyTester.TimeSeries.Tests.dll
+C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries.Tests\obj\Release\StrategyTester.TimeSeries.Tests.pdb

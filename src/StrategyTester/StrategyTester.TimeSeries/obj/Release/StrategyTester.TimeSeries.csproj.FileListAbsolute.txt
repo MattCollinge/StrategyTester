@@ -1,0 +1,13 @@
+C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries\bin\Release\StrategyTester.TimeSeries.dll
+C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries\bin\Release\StrategyTester.TimeSeries.pdb
+C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries\bin\Release\Ionic.Zip.dll
+C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries\bin\Release\MongoDB.Bson.dll
+C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries\bin\Release\MongoDB.Driver.dll
+C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries\bin\Release\Ionic.Zip.xml
+C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries\bin\Release\MongoDB.Bson.pdb
+C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries\bin\Release\MongoDB.Bson.xml
+C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries\bin\Release\MongoDB.Driver.pdb
+C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries\bin\Release\MongoDB.Driver.xml
+C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries\obj\Release\ResolveAssemblyReference.cache
+C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries\obj\Release\StrategyTester.TimeSeries.dll
+C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries\obj\Release\StrategyTester.TimeSeries.pdb

@@ -8,12 +8,13 @@ using MongoDB.Bson.Serialization;
 
 namespace StrategyTester.TimeSeries
 {
-   public class OHLCIntevalRepository
+   public class OHLCVIntervalRepository
     {
-       private MongoServer server;
-       private MongoDatabase db;
+       private static MongoServer server;
+       private static MongoDatabase db;
        private string collectionName = "OHLCV";
-       public OHLCIntevalRepository()
+
+       static OHLCVIntervalRepository()
        {
            string connectionString = "mongodb://localhost";
            server = MongoServer.Create(connectionString);

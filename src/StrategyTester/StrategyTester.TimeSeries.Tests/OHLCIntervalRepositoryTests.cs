@@ -27,7 +27,7 @@ namespace StrategyTester.TimeSeries.Tests
 
             newOHLCVInterval.Id = newOHLCVInterval.Instrument + newOHLCVInterval.DateTime.Ticks.ToString();
 
-            OHLCIntevalRepository repository = new OHLCIntevalRepository();
+            OHLCVIntervalRepository repository = new OHLCVIntervalRepository();
             repository.Save(newOHLCVInterval);
         }
 
@@ -35,7 +35,7 @@ namespace StrategyTester.TimeSeries.Tests
         public void CanGetByTimeSpan()
         {
 
-            OHLCIntevalRepository repository = new OHLCIntevalRepository();
+            OHLCVIntervalRepository repository = new OHLCVIntervalRepository();
           var intervals =  repository.GetByTimeSpan("OHLCIntervalRepositoryTests", DateTime.MinValue , DateTime.MaxValue);
            var intevalList = intervals.ToList<OHLCVInterval>();
            Assert.That(intevalList.Count > 0);

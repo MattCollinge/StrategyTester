@@ -5,7 +5,7 @@ using System.Text;
 
 namespace StrategyTester.TimeSeries
 {
-    public class EODDataOHLVCIntervalParser
+    public class EODDataOHLVCIntervalParser :IParseIntervals 
     {
         const int instrument = 0, date = 1, open = 2, high = 3, low = 4, close = 5, vol = 6;
 

@@ -53,7 +53,7 @@
   <ItemGroup>
     <Compile Include="HistoricalDataLoader.cs" />
     <Compile Include="IStoreOHLCVIntervals.cs" />
-    <Compile Include="OHLCIntevalRepository.cs" />
+    <Compile Include="OHLCVIntervalRepository.cs" />
     <Compile Include="Parsers\EODDataOHLVCIntervalParser.cs" />
     <Compile Include="Parsers\IParseIntervals.cs" />
     <Compile Include="OHLCVInterval.cs" />

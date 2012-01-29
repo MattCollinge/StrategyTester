@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Ionic.Zip;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace StrategyTester.TimeSeries
 {
@@ -27,17 +28,44 @@ namespace StrategyTester.TimeSeries
        //Save each OHLCVInterval with a OHLVCIntervalRepsository
        //Next file...
 
-       private void EnumerateExchangesFromRootFolder(string rootFolder)
+       public void EnumerateExchangesFromRootFolder(string rootFolder)
        {
            DirectoryInfo folder = new DirectoryInfo(rootFolder);
-           foreach(DirectoryInfo exchange in folder.EnumerateDirectories())
+           Parallel.ForEach<DirectoryInfo>(folder.EnumerateDirectories(), exchange =>
            {
-                //Enumerate Zip files...
-               foreach (FileInfo yearlyData in exchange.EnumerateFiles())
-               { 
-                   //ExtractZipFile;
-                   //Parse & Save OHLCVIntervals
-                   
+               //Enumerate Zip files...
+               //  foreach (FileInfo yearlyData in exchange.EnumerateFiles())
+               EnumerateYearlyDataForExchange(exchange);
+           });
+       }
+
+       private void EnumerateYearlyDataForExchange(DirectoryInfo exchange)
+       {
+           Parallel.ForEach<FileInfo>(exchange.EnumerateFiles(), yearlyData =>
+           {
+               var targetFolder = exchange.CreateSubdirectory(yearlyData.Name + "Extracted").FullName;
+               //ExtractZipFile;
+               ExtractZipFile(yearlyData.FullName, targetFolder);
+               //For each file in target folder
+               EnumerateExtractedDataForYear(targetFolder);
+           });
+       }
+
+       private void EnumerateExtractedDataForYear(string targetFolder)
+       {
+           foreach (var extractedFile in new DirectoryInfo(targetFolder).EnumerateFiles())
+           {
+               //Parse & Save OHLCVIntervals
+               OHLCVIntervalReader reader = new OHLCVIntervalReader(
+                   extractedFile.OpenText(),
+                   new EODDataOHLVCIntervalParser(),
+                   false);
+
+               OHLCVIntervalRepository repository = new OHLCVIntervalRepository();
+
+               foreach (var interval in reader)
+               {
+                   repository.Save(interval);
                }
            }
        }
