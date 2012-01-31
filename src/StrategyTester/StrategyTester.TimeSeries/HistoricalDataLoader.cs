@@ -8,9 +8,10 @@ using System.Threading.Tasks;
 using log4net;
 using System.Diagnostics;
 
+[assembly: log4net.Config.XmlConfigurator(Watch = true)]
 namespace StrategyTester.TimeSeries
 {
-   public class HistoricalDataLoader
+    public class HistoricalDataLoader
     {
        private ILog logger = LogManager.GetLogger(typeof(HistoricalDataLoader));
               
@@ -45,8 +46,13 @@ namespace StrategyTester.TimeSeries
 
        private void EnumerateYearlyDataForExchange(DirectoryInfo exchange)
        {
-           Parallel.ForEach<FileInfo>(exchange.EnumerateFiles("*.zip"), yearlyData =>
+           Stopwatch stopwatch = new Stopwatch();
+           
+           foreach(FileInfo yearlyData  in exchange.EnumerateFiles("*.zip"))
            {
+               stopwatch.Reset();
+               stopwatch.Start();
+             
                var targetFolder = yearlyData.FullName + "Extracted";
 
                if (!Directory.Exists(targetFolder))
@@ -55,16 +61,20 @@ namespace StrategyTester.TimeSeries
                }
 
                EnumerateExtractedDataForYear(targetFolder);
-           });
+
+               stopwatch.Stop();
+               Console.WriteLine("Finished parsing files in folder: {0} in: {1} seconds.", targetFolder, stopwatch.ElapsedMilliseconds / 1000);
+          
+           }
        }
 
        private void EnumerateExtractedDataForYear(string targetFolder)
        {
-           Stopwatch stopwatch = new Stopwatch();
+         //  Stopwatch stopwatch = new Stopwatch();
            foreach (var extractedFile in new DirectoryInfo(targetFolder).EnumerateFiles())
            {
-               stopwatch.Reset();
-               stopwatch.Start();
+               //stopwatch.Reset();
+              // stopwatch.Start();
                //Parse & Save OHLCVIntervals
                OHLCVIntervalReader reader = new OHLCVIntervalReader(
                    extractedFile.OpenText(),
@@ -85,8 +95,8 @@ namespace StrategyTester.TimeSeries
                {
                    logger.ErrorFormat("Parser Error in file: {0}, @line: {1}, exception: {2}", extractedFile.Name, lineCount, e.Message);               
                }
-               stopwatch.Stop();
-               Console.WriteLine("Finished parsing file: {0} in: {1} seconds.", extractedFile.Name,stopwatch.ElapsedMilliseconds/1000);
+              // stopwatch.Stop();
+              // Console.WriteLine("Finished parsing file: {0} in: {1} seconds.", extractedFile.Name,stopwatch.ElapsedMilliseconds/1000);
            }
        }
 
