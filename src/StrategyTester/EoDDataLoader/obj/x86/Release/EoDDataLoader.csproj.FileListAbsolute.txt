@@ -7,3 +7,6 @@ C:\Dev\Trading\StrategyTester\src\StrategyTester\EoDDataLoader\bin\Release\Ionic
 C:\Dev\Trading\StrategyTester\src\StrategyTester\EoDDataLoader\obj\x86\Release\ResolveAssemblyReference.cache
 C:\Dev\Trading\StrategyTester\src\StrategyTester\EoDDataLoader\obj\x86\Release\EoDDataLoader.exe
 C:\Dev\Trading\StrategyTester\src\StrategyTester\EoDDataLoader\obj\x86\Release\EoDDataLoader.pdb
+C:\Dev\Trading\StrategyTester\src\StrategyTester\EoDDataLoader\bin\Release\EoDDataLoader.exe.config
+C:\Dev\Trading\StrategyTester\src\StrategyTester\EoDDataLoader\bin\Release\log4net.dll
+C:\Dev\Trading\StrategyTester\src\StrategyTester\EoDDataLoader\bin\Release\log4net.xml

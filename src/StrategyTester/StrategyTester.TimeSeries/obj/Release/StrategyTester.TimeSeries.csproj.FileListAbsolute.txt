@@ -11,3 +11,5 @@ C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries\bin\R
 C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries\obj\Release\ResolveAssemblyReference.cache
 C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries\obj\Release\StrategyTester.TimeSeries.dll
 C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries\obj\Release\StrategyTester.TimeSeries.pdb
+C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries\bin\Release\log4net.dll
+C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries\bin\Release\log4net.xml

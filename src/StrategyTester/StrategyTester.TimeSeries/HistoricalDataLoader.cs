@@ -5,11 +5,15 @@ using System.Text;
 using Ionic.Zip;
 using System.IO;
 using System.Threading.Tasks;
+using log4net;
+using System.Diagnostics;
 
 namespace StrategyTester.TimeSeries
 {
    public class HistoricalDataLoader
     {
+       private ILog logger = LogManager.GetLogger(typeof(HistoricalDataLoader));
+              
        // Start from Directory root
        //Assume format:
        //+Root
@@ -41,20 +45,26 @@ namespace StrategyTester.TimeSeries
 
        private void EnumerateYearlyDataForExchange(DirectoryInfo exchange)
        {
-           Parallel.ForEach<FileInfo>(exchange.EnumerateFiles(), yearlyData =>
+           Parallel.ForEach<FileInfo>(exchange.EnumerateFiles("*.zip"), yearlyData =>
            {
-               var targetFolder = exchange.CreateSubdirectory(yearlyData.Name + "Extracted").FullName;
-               //ExtractZipFile;
-               ExtractZipFile(yearlyData.FullName, targetFolder);
-               //For each file in target folder
+               var targetFolder = yearlyData.FullName + "Extracted";
+
+               if (!Directory.Exists(targetFolder))
+               {
+                   ExtractZipFile(yearlyData.FullName, targetFolder);
+               }
+
                EnumerateExtractedDataForYear(targetFolder);
            });
        }
 
        private void EnumerateExtractedDataForYear(string targetFolder)
        {
+           Stopwatch stopwatch = new Stopwatch();
            foreach (var extractedFile in new DirectoryInfo(targetFolder).EnumerateFiles())
            {
+               stopwatch.Reset();
+               stopwatch.Start();
                //Parse & Save OHLCVIntervals
                OHLCVIntervalReader reader = new OHLCVIntervalReader(
                    extractedFile.OpenText(),
@@ -62,22 +72,39 @@ namespace StrategyTester.TimeSeries
                    false);
 
                OHLCVIntervalRepository repository = new OHLCVIntervalRepository();
-
-               foreach (var interval in reader)
+               int lineCount = 0;
+               try
                {
-                   repository.Save(interval);
+                   foreach (var interval in reader)
+                   {
+                       lineCount++;
+                       repository.Save(interval);
+                   }
                }
+               catch (Exception e)
+               {
+                   logger.ErrorFormat("Parser Error in file: {0}, @line: {1}, exception: {2}", extractedFile.Name, lineCount, e.Message);               
+               }
+               stopwatch.Stop();
+               Console.WriteLine("Finished parsing file: {0} in: {1} seconds.", extractedFile.Name,stopwatch.ElapsedMilliseconds/1000);
            }
        }
 
        private void ExtractZipFile(string zipFile, string targetFolder)
        {
-           using (ZipFile zip1 = ZipFile.Read(zipFile))
+           try
            {
-              foreach (ZipEntry e in zip1)
+               using (ZipFile zip1 = ZipFile.Read(zipFile))
                {
-                   e.Extract(targetFolder, ExtractExistingFileAction.OverwriteSilently);
+                   foreach (ZipEntry e in zip1)
+                   {
+                       e.Extract(targetFolder, ExtractExistingFileAction.OverwriteSilently);
+                   }
                }
+           }
+           catch (Ionic.Zip.ZipException e)
+           {
+               logger.Error(string.Format("Error extracting {0}, {1}, {2}", zipFile, e.Message, e.ToString()));
            }
        }
     }

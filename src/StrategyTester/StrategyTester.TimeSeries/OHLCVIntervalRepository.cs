@@ -43,7 +43,7 @@ namespace StrategyTester.TimeSeries
        {
            var collection = db.GetCollection<OHLCVInterval>(collectionName);//intervalToSave.Instrument);
 
-           collection.Save<OHLCVInterval>(intervalToSave);
+           collection.Insert<OHLCVInterval>(intervalToSave);
  
        }
     }
