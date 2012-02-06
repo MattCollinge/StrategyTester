@@ -15,19 +15,62 @@ namespace StrategyTester.TimeSeries.Tests
         public void Can_ParseFromString()
         {
             string testString = "ABL,02-Jan-96,21.75,21.95,21.55,21.70,12345";
-            EODDataOHLVCIntervalParser parser = new EODDataOHLVCIntervalParser();
+            string exchange = "TestExchange";
+            EODDataOHLVCIntervalParser parser = new EODDataOHLVCIntervalParser(exchange);
             OHLCVInterval OHLCV = parser.Parse(testString, 4);
            
             Assert.IsNotNull(OHLCV);
             Assert.AreEqual(new DateTime(1996, 01, 02), OHLCV.DateTime);
-            Assert.IsFalse(Math.Abs(21.75 - OHLCV.Open) > double.Epsilon);
-            Assert.IsFalse(Math.Abs(21.95 - OHLCV.High) > double.Epsilon);
-            Assert.IsFalse(Math.Abs(21.55 - OHLCV.Low) > double.Epsilon);
-            Assert.IsFalse(Math.Abs(21.70 - OHLCV.Close) > double.Epsilon);
-            Assert.IsFalse(Math.Abs(12345 - OHLCV.Volume) > double.Epsilon);
+            Assert.IsFalse(Math.Abs(21.75f - OHLCV.Open) > Single.Epsilon);
+            Assert.IsFalse(Math.Abs(21.95f - OHLCV.High) > Single.Epsilon);
+            Assert.IsFalse(Math.Abs(21.55f - OHLCV.Low) > Single.Epsilon);
+            Assert.IsFalse(Math.Abs(21.70f - OHLCV.Close) > Single.Epsilon);
+            Assert.AreEqual(12345, OHLCV.Volume);
             Assert.AreEqual(4, OHLCV.Index);
             Assert.AreEqual("ABL", OHLCV.Instrument);
-            Assert.AreEqual("ABL" + new DateTime(1996, 01, 02).Ticks.ToString(), OHLCV.Id);
+            Assert.AreEqual(exchange + "ABL" + new DateTime(1996, 01, 02).ToShortDateString(), OHLCV.Id);
+
+        }
+
+        [Test]
+        public void Can_ParseFromStringWithAltDateFormat()
+        {
+            string testString = "ABL,20110107,21.75,21.95,21.55,21.70,12345";
+            string exchange = "TestExchange";
+            EODDataOHLVCIntervalParser parser = new EODDataOHLVCIntervalParser(exchange);
+           OHLCVInterval OHLCV = parser.Parse(testString, 4);
+
+            Assert.IsNotNull(OHLCV);
+            Assert.AreEqual(new DateTime(2011, 01, 07), OHLCV.DateTime);
+            Assert.IsFalse(Math.Abs(21.75f - OHLCV.Open) > Single.Epsilon);
+            Assert.IsFalse(Math.Abs(21.95f - OHLCV.High) > Single.Epsilon);
+            Assert.IsFalse(Math.Abs(21.55f - OHLCV.Low) > Single.Epsilon);
+            Assert.IsFalse(Math.Abs(21.70f - OHLCV.Close) > Single.Epsilon);
+            Assert.AreEqual(12345, OHLCV.Volume);
+            Assert.AreEqual(4, OHLCV.Index);
+            Assert.AreEqual("ABL", OHLCV.Instrument);
+            Assert.AreEqual(exchange + "ABL" + new DateTime(2011, 01, 07).ToShortDateString(), OHLCV.Id);
+
+        }
+
+        [Test]
+        public void Can_ParseFromStringWithAltDateFormat2()
+        {
+            string testString = "ABL,20110301,21.75,21.95,21.55,21.70,12345";
+            string exchange = "TestExchange";
+            EODDataOHLVCIntervalParser parser = new EODDataOHLVCIntervalParser(exchange);
+            OHLCVInterval OHLCV = parser.Parse(testString, 4);
+
+            Assert.IsNotNull(OHLCV);
+            Assert.AreEqual(new DateTime(2011, 03, 01), OHLCV.DateTime);
+            Assert.IsFalse(Math.Abs(21.75f - OHLCV.Open) > Single.Epsilon);
+            Assert.IsFalse(Math.Abs(21.95f - OHLCV.High) > Single.Epsilon);
+            Assert.IsFalse(Math.Abs(21.55f - OHLCV.Low) > Single.Epsilon);
+            Assert.IsFalse(Math.Abs(21.70f - OHLCV.Close) > Single.Epsilon);
+            Assert.AreEqual(12345, OHLCV.Volume);
+            Assert.AreEqual(4, OHLCV.Index);
+            Assert.AreEqual("ABL", OHLCV.Instrument);
+            Assert.AreEqual(exchange + "ABL" + new DateTime(2011, 03, 01).ToShortDateString(), OHLCV.Id);
 
         }
     }

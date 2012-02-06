@@ -16,16 +16,16 @@ namespace StrategyTester.TimeSeries.Tests
             OHLCVInterval newOHLCVInterval = new OHLCVInterval();
 
             newOHLCVInterval.DateTime = DateTime.Now;
-            newOHLCVInterval.Open = 1234d;
-            newOHLCVInterval.High =1235d;
-            newOHLCVInterval.Low = 1233d;
-            newOHLCVInterval.Close = 1234.5d;
+            newOHLCVInterval.Open = 1234f;
+            newOHLCVInterval.High =1235f;
+            newOHLCVInterval.Low = 1233f;
+            newOHLCVInterval.Close = 1234.5f;
             newOHLCVInterval.Volume = 1234567890;
             newOHLCVInterval.Index = 0;
-            newOHLCVInterval.DataSource = "EODData";
+            //newOHLCVInterval.DataSource = "EODData";
             newOHLCVInterval.Instrument ="OHLCIntervalRepositoryTests";
 
-            newOHLCVInterval.Id = newOHLCVInterval.Instrument + newOHLCVInterval.DateTime.Ticks.ToString();
+          //  newOHLCVInterval.Id = Guid.NewGuid();// newOHLCVInterval.Instrument + newOHLCVInterval.DateTime.Ticks.ToString();
 
             OHLCVIntervalRepository repository = new OHLCVIntervalRepository();
             repository.Save(newOHLCVInterval);

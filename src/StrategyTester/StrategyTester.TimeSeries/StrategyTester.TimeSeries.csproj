@@ -56,6 +56,7 @@
   <ItemGroup>
     <Compile Include="HistoricalDataLoader.cs" />
     <Compile Include="IStoreOHLCVIntervals.cs" />
+    <Compile Include="Stats\MaxEigenData.cs" />
     <Compile Include="OHLCVIntervalRepository.cs" />
     <Compile Include="Parsers\EODDataOHLVCIntervalParser.cs" />
     <Compile Include="Parsers\IParseIntervals.cs" />
@@ -63,9 +64,15 @@
     <Compile Include="OHLCVIntervalReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Parsers\YahooOHLVCIntervalParser.cs" />
+    <Compile Include="Stats\GSLClass.cs" />
+    <Compile Include="Stats\JohansenHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Stats\libgslcblas_d.dll" />
+    <Content Include="Stats\libgsl_d.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

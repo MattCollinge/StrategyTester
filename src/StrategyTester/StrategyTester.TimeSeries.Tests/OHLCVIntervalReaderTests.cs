@@ -35,17 +35,17 @@ namespace StrategyTester.TimeSeries.Tests
                         .IgnoreArguments()
                         .Return(new OHLCVInterval() 
                         {
-                             Close = 1213.27,
-                              DataSource="Stub",
+                             Close = 1213.27f,
+                             // DataSource="Stub",
                                DateTime=new DateTime(2008,09,26),
-                                High=1215.77,
+                                High=1215.77f,
                                  Index=0,
                                   Instrument="StubInstrument",
-                                   Interval="Day",
-                                     Low=1187.54,
-                                      Open=1204.47,
+                                   //Interval="Day",
+                                     Low=1187.54f,
+                                      Open=1204.47f,
                                        Volume=5383610000,
-                                       Id = "StubInstrument" + new DateTime(2008,09,26).Ticks.ToString()
+                                       //Id = Guid.NewGuid()//"StubInstrument" + new DateTime(2008,09,26).Ticks.ToString()
                         }
                         );
                 }
@@ -57,15 +57,15 @@ namespace StrategyTester.TimeSeries.Tests
           foreach (var interval in reader)
           {
               Assert.AreEqual(new DateTime(2008, 09, 26), interval.DateTime);
-              Assert.IsFalse(Math.Abs(1204.47 - interval.Open) > double.Epsilon);
-              Assert.IsFalse(Math.Abs(1215.77 - interval.High) > double.Epsilon);
-              Assert.IsFalse(Math.Abs(1187.54 - interval.Low) > double.Epsilon);
-              Assert.IsFalse(Math.Abs(1213.27 - interval.Close) > double.Epsilon);
-              Assert.IsFalse(Math.Abs(5383610000 - interval.Volume) > double.Epsilon);
+              Assert.IsFalse(Math.Abs(1204.47f - interval.Open) > Single.Epsilon);
+              Assert.IsFalse(Math.Abs(1215.77f - interval.High) > Single.Epsilon);
+              Assert.IsFalse(Math.Abs(1187.54f - interval.Low) > Single.Epsilon);
+              Assert.IsFalse(Math.Abs(1213.27f - interval.Close) > Single.Epsilon);
+              Assert.AreEqual(5383610000, interval.Volume);
               Assert.AreEqual(0, interval.Index);
-              Assert.AreEqual("Stub", interval.DataSource);
+              //Assert.AreEqual("Stub", interval.DataSource);
               Assert.AreEqual("StubInstrument", interval.Instrument);
-              Assert.AreEqual("StubInstrument" + new DateTime(2008, 09, 26).Ticks.ToString(), interval.Id);
+             // Assert.AreEqual("StubInstrument" + new DateTime(2008, 09, 26).Ticks.ToString(), interval.Id);
               break;
           }
         }

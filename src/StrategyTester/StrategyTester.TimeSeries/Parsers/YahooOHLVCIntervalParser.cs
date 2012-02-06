@@ -22,15 +22,15 @@ namespace StrategyTester.TimeSeries
 
             string[] fields = rawData.Split(",".ToCharArray());
             newOHLCVInterval.DateTime = DateTime.Parse(fields[date]);
-            newOHLCVInterval.Open = double.Parse(fields[open]);
-            newOHLCVInterval.High = double.Parse(fields[high]);
-            newOHLCVInterval.Low = double.Parse(fields[low]);
-            newOHLCVInterval.Close = double.Parse(fields[close]);
+            newOHLCVInterval.Open = Single.Parse(fields[open]);
+            newOHLCVInterval.High = Single.Parse(fields[high]);
+            newOHLCVInterval.Low = Single.Parse(fields[low]);
+            newOHLCVInterval.Close = Single.Parse(fields[close]);
             newOHLCVInterval.Volume = long.Parse(fields[vol]);
             newOHLCVInterval.Index = index;
-            newOHLCVInterval.DataSource = "Yahoo";
+            //newOHLCVInterval.DataSource = "Yahoo";
             newOHLCVInterval.Instrument = this.instrument;
-            newOHLCVInterval.Id = newOHLCVInterval.Instrument + newOHLCVInterval.DateTime.Ticks.ToString();
+            newOHLCVInterval.Id = newOHLCVInterval.Instrument + newOHLCVInterval.DateTime.ToShortDateString();
 
             return newOHLCVInterval;
         }

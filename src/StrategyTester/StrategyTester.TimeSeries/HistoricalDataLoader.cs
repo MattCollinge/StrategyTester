@@ -36,12 +36,14 @@ namespace StrategyTester.TimeSeries
        public void EnumerateExchangesFromRootFolder(string rootFolder)
        {
            DirectoryInfo folder = new DirectoryInfo(rootFolder);
-           Parallel.ForEach<DirectoryInfo>(folder.EnumerateDirectories(), exchange =>
+           //Parallel.ForEach<DirectoryInfo>(folder.EnumerateDirectories(), exchange =>
+           foreach(DirectoryInfo exchange in folder.EnumerateDirectories())
            {
                //Enumerate Zip files...
                //  foreach (FileInfo yearlyData in exchange.EnumerateFiles())
                EnumerateYearlyDataForExchange(exchange);
-           });
+           }
+           //});
        }
 
        private void EnumerateYearlyDataForExchange(DirectoryInfo exchange)
@@ -54,31 +56,32 @@ namespace StrategyTester.TimeSeries
                stopwatch.Start();
              
                var targetFolder = yearlyData.FullName + "Extracted";
-
+             
                if (!Directory.Exists(targetFolder))
                {
                    ExtractZipFile(yearlyData.FullName, targetFolder);
                }
 
-               EnumerateExtractedDataForYear(targetFolder);
-
-               stopwatch.Stop();
-               Console.WriteLine("Finished parsing files in folder: {0} in: {1} seconds.", targetFolder, stopwatch.ElapsedMilliseconds / 1000);
+             int fileCount =  EnumerateExtractedDataForYear(targetFolder, exchange.Name );
+                stopwatch.Stop();
+               Console.WriteLine("Finished parsing {0} files in folder: {1} in: {2} seconds.", fileCount, targetFolder, stopwatch.ElapsedMilliseconds / 1000);
           
            }
        }
 
-       private void EnumerateExtractedDataForYear(string targetFolder)
+       private int EnumerateExtractedDataForYear(string targetFolder, string exchange)
        {
-         //  Stopwatch stopwatch = new Stopwatch();
+           //  Stopwatch stopwatch = new Stopwatch();
+           int fileCount = 0;
            foreach (var extractedFile in new DirectoryInfo(targetFolder).EnumerateFiles())
            {
+               fileCount++;
                //stopwatch.Reset();
-              // stopwatch.Start();
+               // stopwatch.Start();
                //Parse & Save OHLCVIntervals
                OHLCVIntervalReader reader = new OHLCVIntervalReader(
                    extractedFile.OpenText(),
-                   new EODDataOHLVCIntervalParser(),
+                   new EODDataOHLVCIntervalParser(exchange),
                    false);
 
                OHLCVIntervalRepository repository = new OHLCVIntervalRepository();
@@ -93,11 +96,14 @@ namespace StrategyTester.TimeSeries
                }
                catch (Exception e)
                {
-                   logger.ErrorFormat("Parser Error in file: {0}, @line: {1}, exception: {2}", extractedFile.Name, lineCount, e.Message);               
+                   logger.ErrorFormat("Parser Error in file: {0}, @line: {1}, exception: {2}", extractedFile.Name, lineCount, e.Message);
                }
-              // stopwatch.Stop();
-              // Console.WriteLine("Finished parsing file: {0} in: {1} seconds.", extractedFile.Name,stopwatch.ElapsedMilliseconds/1000);
+               logger.InfoFormat("Parsed file: {0}, sucessfully parsed  {1} lines", extractedFile.Name, lineCount);
+
+               // stopwatch.Stop();
+               // Console.WriteLine("Finished parsing file: {0} in: {1} seconds.", extractedFile.Name,stopwatch.ElapsedMilliseconds/1000);
            }
+           return fileCount;
        }
 
        private void ExtractZipFile(string zipFile, string targetFolder)

@@ -30,7 +30,7 @@ namespace StrategyTester.TimeSeries
 
        public IEnumerable<OHLCVInterval> GetByTimeSpan(string instrument, DateTime from, DateTime to)
        {
-           var collection = db.GetCollection<OHLCVInterval>(collectionName); //instrument);
+           var collection = db.GetCollection<OHLCVInterval>(collectionName); 
            var mongoQuery = Query.GT("DateTime", from).LT(to);
            
            foreach (var item in collection.Find(mongoQuery))
@@ -41,7 +41,7 @@ namespace StrategyTester.TimeSeries
 
        public void Save(OHLCVInterval intervalToSave)
        {
-           var collection = db.GetCollection<OHLCVInterval>(collectionName);//intervalToSave.Instrument);
+           var collection = db.GetCollection<OHLCVInterval>(collectionName); //intervalToSave.Instrument); 
 
            collection.Insert<OHLCVInterval>(intervalToSave);
  
