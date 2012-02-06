@@ -1,0 +1,45 @@
+Save ~500 writers
+Finished! Took: 17247
+7,089,739 count
+1,617,231,872 size
+
+aborted run:
+1,222,123 took: 671
+
+Insert ~6 writers
+Finished! Took: 7004
+23,645,831 count
+4,606,973,540 size
+
+DateFormat: 20110107
+
+Insert ~6 writers
+Finished! Took: 28066
+31,413,691 count
+4,856,803,856 size
+14,541,455,344 storage size
+1,557,536,176 Index size
+
+Insert ~6 writers One collection per instrument -Mongod crashed 13,534 collections
+Finished! Took: 23780
+9,365,645 count
+1,107,680,644 size
+14,541,455,344 storage size
+342,876,912 Index size
+
+
+Insert 1 writer One big collection
+Finished! Took: 6424
+31,931,529 count
+5,150,927,072 size
+5,947,019,264 storage size
+1,726,223,408 Index size
+
+
+Insert 1 writer One big collection
+Finished! Took: 8174
+36,005,598 count
+5,807,318,080 size
+7,148,212,224 storage size
+1,935,275,552 Index size
+1,726,223,408 Index size
