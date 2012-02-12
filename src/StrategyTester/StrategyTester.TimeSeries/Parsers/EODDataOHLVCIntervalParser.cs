@@ -33,6 +33,7 @@ namespace StrategyTester.TimeSeries
             newOHLCVInterval.Close = Single.Parse(fields[close]);
             newOHLCVInterval.Volume = long.Parse(fields[vol]);
             newOHLCVInterval.Index = index;
+            newOHLCVInterval.Exchange = exchange;
             
            // newOHLCVInterval.DataSource = "EODData";
             newOHLCVInterval.Instrument =fields[instrument];

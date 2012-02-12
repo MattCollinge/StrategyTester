@@ -19,6 +19,7 @@ namespace StrategyTester.TimeSeries
         public long Index { get; set; }
         //public string Interval { get; set; }
         public string Instrument { get; set; }
+        public string Exchange { get; set; }
         //public string DataSource { get; set; }
        // public string Key { get { return String.Format("{0}{1}", Instrument, DateTime.ToShortDateString()); } }
     }
