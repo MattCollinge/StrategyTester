@@ -1,0 +1,14 @@
+# git ignore file
+configurations 
+bin
+Bin
+obj
+*.suo
+*.user
+/src/StrategyTester/EoDDataLoader/obj/x86/Release/
+/src/StrategyTester/EoDDataLoader/obj
+/src/StrategyTester/StrategyTester.TimeSeries/obj
+/src/StrategyTester/StrategyTester.TimeSeries.Tests/obj
+/src/StrategyTester/EoDDataLoader/bin
+/src/StrategyTester/StrategyTester.TimeSeries/bin
+/src/StrategyTester/StrategyTester.TimeSeries.Tests/bin

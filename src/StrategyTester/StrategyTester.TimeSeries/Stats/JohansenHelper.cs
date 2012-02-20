@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace tripletfinder
+namespace StrategyTester.TimeSeries.Stats
 {
     class JohansenHelper
     {
@@ -143,9 +143,6 @@ namespace tripletfinder
             }
             return summary;
         }
-
-
-
 
         public static double[] GetSignificantEvals(List<MaxEigenData> maxEigStats, double[] eigenValuesVec)
         {

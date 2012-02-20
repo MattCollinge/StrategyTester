@@ -1,0 +1,66 @@
+use EoDData;
+
+x = db.OHLCV.findOne();
+
+function Map() {
+	 
+	var key   = {exchange: this.Exchange, instrument: this.Instrument};
+	var value = {intervals:1, from:this.DateTime, to:this.DateTime};
+	emit(key, value); 
+	
+}
+
+function emit(k, v) {
+    print("emit");
+    print("  k:" + tojson(k) + " v:" + tojson(v));
+}
+
+Map.apply(x);
+//emit
+//  k:{ "exchange" : "AMEX", "instrument" : "ABL" } v:{
+//        "intervals" : 1,
+//        "from" : ISODate("1992-01-01T00:00:00Z"),
+//        "to" : ISODate("1992-01-01T00:00:00Z")
+//}
+
+function Reduce(key, values) {
+	var sum = 0;
+	var from = values[0].from.getTime();
+	var to = values[0].to.getTime();
+	
+  values.forEach(function(doc) {
+  	from = Math.min(from, doc.from.getTime());
+	to = Math.max(to, doc.to.getTime());
+    sum += doc.intervals;
+  });
+
+	var f = new Date();
+	f.setTime(from);
+
+	var t = new Date();
+	t.setTime(to);
+  
+  return {intervals: sum, "from":f, "to":t};
+}
+
+//Test Reduce...
+
+Reduce({ "exchange" : "AMEX", "instrument" : "ABL" },[
+{ "intervals" : 1, "from" : ISODate("1992-01-01T00:00:00Z"), "to" : ISODate("1992-01-01T00:00:00Z")},
+{ "intervals" : 1, "from" : ISODate("1992-01-02T00:00:00Z"), "to" : ISODate("1992-01-02T00:00:00Z")}
+]);
+
+//Test ordering...
+
+Reduce({ "exchange" : "AMEX", "instrument" : "ABL" },[
+{ "intervals" : 1, "from" : ISODate("1992-01-02T00:00:00Z"), "to" : ISODate("1992-01-02T00:00:00Z")},
+{ "intervals" : 1, "from" : ISODate("1992-01-01T00:00:00Z"), "to" : ISODate("1992-01-01T00:00:00Z")}
+]);
+
+//Test re-reduction...
+
+Reduce({ "exchange" : "AMEX", "instrument" : "ABL" },[
+	{ "intervals" : 1, "from" : ISODate("1992-01-02T00:00:00Z"), "to" : ISODate("1992-01-02T00:00:00Z")},
+Reduce({ "exchange" : "AMEX", "instrument" : "ABL" },[
+	{ "intervals" : 1, "from" : ISODate("1992-01-01T00:00:00Z"), "to" : ISODate("1992-01-01T00:00:00Z")}])
+]);

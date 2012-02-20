@@ -47,6 +47,7 @@ namespace StrategyTester.TimeSeries.Tests
             Assert.IsFalse(Math.Abs(21.55f - OHLCV.Low) > Single.Epsilon);
             Assert.IsFalse(Math.Abs(21.70f - OHLCV.Close) > Single.Epsilon);
             Assert.AreEqual(12345, OHLCV.Volume);
+            Assert.AreEqual(exchange, OHLCV.Exchange );
             Assert.AreEqual(4, OHLCV.Index);
             Assert.AreEqual("ABL", OHLCV.Instrument);
             Assert.AreEqual(exchange + "ABL" + new DateTime(2011, 01, 07).ToShortDateString(), OHLCV.Id);
@@ -68,6 +69,7 @@ namespace StrategyTester.TimeSeries.Tests
             Assert.IsFalse(Math.Abs(21.55f - OHLCV.Low) > Single.Epsilon);
             Assert.IsFalse(Math.Abs(21.70f - OHLCV.Close) > Single.Epsilon);
             Assert.AreEqual(12345, OHLCV.Volume);
+            Assert.AreEqual(exchange, OHLCV.Exchange);
             Assert.AreEqual(4, OHLCV.Index);
             Assert.AreEqual("ABL", OHLCV.Instrument);
             Assert.AreEqual(exchange + "ABL" + new DateTime(2011, 03, 01).ToShortDateString(), OHLCV.Id);

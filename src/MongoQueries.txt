@@ -1,0 +1,21 @@
+{ 
+"Exchange" : "NYMEX", 
+"Instrument" : /NGM.*/, 
+"DateTime" : {$gt:new Date(1992,1,1), $lt:new Date(2012,1,1)} 
+}
+
+db.OHLCV.find({ 
+	"Exchange" : "NYMEX", 
+	"Instrument" : /NGM.*/, 
+	"DateTime" : 
+		{ 
+		"$gt" : ISODate("1992-02-01T00:00:00Z"), 
+		"$lt" : ISODate("2012-02-01T00:00:00Z") } 
+		}, 
+	{ 
+	"Instrument" : 1, 
+	"DateTime" : 1, 
+	"Close" : 1, 
+	"Volume" : 1 
+	}).sort({ "DateTime" : 1 });
+db.OHLCV.find({ "Exchange" : "NYMEX", "Instrument" : /NGM.*/, "DateTime" : { "$gt" : ISODate("1992-02-01T00:00:00Z"), "$lt" : ISODate("2012-02-01T00:00:00Z") } }, { "Instrument" : 1, "DateTime" : 1, "Close" : 1, "Volume" : 1 }).sort({ "DateTime" : 1 }).explain();

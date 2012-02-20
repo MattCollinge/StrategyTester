@@ -42,6 +42,7 @@ namespace StrategyTester.TimeSeries.Tests
                                  Index=0,
                                   Instrument="StubInstrument",
                                    //Interval="Day",
+                                   Exchange="StubExchange",
                                      Low=1187.54f,
                                       Open=1204.47f,
                                        Volume=5383610000,
@@ -63,6 +64,8 @@ namespace StrategyTester.TimeSeries.Tests
               Assert.IsFalse(Math.Abs(1213.27f - interval.Close) > Single.Epsilon);
               Assert.AreEqual(5383610000, interval.Volume);
               Assert.AreEqual(0, interval.Index);
+              Assert.AreEqual("StubExchange", interval.Exchange);
+           
               //Assert.AreEqual("Stub", interval.DataSource);
               Assert.AreEqual("StubInstrument", interval.Instrument);
              // Assert.AreEqual("StubInstrument" + new DateTime(2008, 09, 26).Ticks.ToString(), interval.Id);

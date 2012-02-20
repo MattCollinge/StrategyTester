@@ -43,3 +43,15 @@ Finished! Took: 8174
 7,148,212,224 storage size
 1,935,275,552 Index size
 1,726,223,408 Index size
+
+Insert 1 writer One big collection
+Finished! Took: 8891
+32,644,835 count
+5,868,592,696 size
+8,589,651,968 storage size
+1,741,896,800 Index size
+
+Ran out of page file...
+18,834,317,264 storage size
+1,717,074,464 index size
+55,741,251,584 fileSize
