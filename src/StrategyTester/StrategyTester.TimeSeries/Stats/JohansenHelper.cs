@@ -5,7 +5,7 @@ using System.Text;
 
 namespace StrategyTester.TimeSeries.Stats
 {
-    class JohansenHelper
+    public class JohansenHelper
     {
         //maximum eigen value statistics for constant term assumption
         static double[,] maxEigenCriticalvalues = new double[,]{

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace StrategyTester.TimeSeries.Stats
 {
-    class MaxEigenData
+    public class MaxEigenData
     {
         public string No { get; set; }
         public string TestStatistic { get; set; }

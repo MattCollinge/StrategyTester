@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EODDataOHLCVIntervalParserTests.cs" />
+    <Compile Include="JohansenHelperTests.cs" />
     <Compile Include="OHLCIntervalRepositoryTests.cs" />
     <Compile Include="OHLCVIntervalReaderTests.cs" />
     <Compile Include="OHLCVIntervalTests.cs" />
