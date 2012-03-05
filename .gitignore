@@ -5,7 +5,7 @@ Bin
 obj
 *.suo
 *.user
-/src/StrategyTester/EoDDataLoader/obj/x86/Release/
+/src/StrategyTester/EoDDataLoader/obj/x86/Release/*.*
 /src/StrategyTester/EoDDataLoader/obj
 /src/StrategyTester/StrategyTester.TimeSeries/obj
 /src/StrategyTester/StrategyTester.TimeSeries.Tests/obj

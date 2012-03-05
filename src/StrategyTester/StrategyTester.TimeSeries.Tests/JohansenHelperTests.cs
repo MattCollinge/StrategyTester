@@ -11,7 +11,7 @@ namespace StrategyTester.TimeSeries.Tests
     [TestFixture]
     public class JohansenHelperTests
     {
-        double[,] criticalEigenValues = new double[,]{
+        double[,] criticalEigenValues_ConstantTerm = new double[,]{
             {2.7055,	3.8415,	    6.6349},
             {12.2971,	14.2639,	18.52},
             {18.8928,	21.1314,    25.865},
@@ -25,6 +25,33 @@ namespace StrategyTester.TimeSeries.Tests
             {67.1307,	70.5392,	77.4877},
             {73.0563,	76.5734,	83.7105}};
 
+       double[,] criticalEigenValues_ConstantTermAndTimeTrend = new double[,]{
+            {15.0006,	17.1481,	21.7465},
+            {21.8731,	24.2522,	29.2631},
+            {28.2398,	30.8151,	36.193},
+            {34.4202,	37.1646,	42.8612},
+            {40.5244,	43.4183,	49.4095},
+            {46.5583,	49.5875,	55.8171},
+            {52.5858,	55.7302,	62.1741},
+            {58.5316,	61.8051,	68.503},
+            {64.5292,	67.904, 	74.7434},
+            {70.463,	73.9355,	81.0678},
+            {76.4081,	79.9878,	87.2395}};
+
+        double[,] criticalEigenValues_NoDeterministicPart = new double[,]{
+            {2.9762,	4.1296,	    6.9406},
+            {9.4748,	11.2246,    15.0923},
+            {15.7175,	17.7961,    22.2519},
+            {21.837,    24.1592,    29.0609},
+            {27.916,	30.4428,	35.7359},
+            {33.9271,	36.6301,	42.2333},
+            {39.9085,	42.7679,	48.6606},
+            {45.893,	48.8795,	55.0335},
+            {51.8528,	54.9629,	61.3449},
+            {57.7954,	61.0404,	67.6415},
+            {63.7248,	67.0756,	73.8856},
+            {69.6513,	73.0946,	80.0937}};
+
         [Test]
         public void GetSignificantEigenValuesFor2EigenStats()
         {
@@ -32,16 +59,16 @@ namespace StrategyTester.TimeSeries.Tests
             { 
                 new MaxEigenData(){ 
                      No="2", 
-                    CriticalValue90=criticalEigenValues[0,0].ToString(), 
-                    CriticalValue95=criticalEigenValues[0,1].ToString(),
-                    CriticalValue99=criticalEigenValues[0,2].ToString(),
+                    CriticalValue90=criticalEigenValues_ConstantTerm[0,0].ToString(), 
+                    CriticalValue95=criticalEigenValues_ConstantTerm[0,1].ToString(),
+                    CriticalValue99=criticalEigenValues_ConstantTerm[0,2].ToString(),
                     TestStatistic="128.3"
                 },
                 new MaxEigenData(){ 
                     No="1", 
-                    CriticalValue90=criticalEigenValues[1,0].ToString(), 
-                    CriticalValue95=criticalEigenValues[1,1].ToString(),
-                    CriticalValue99=criticalEigenValues[1,2].ToString(),
+                    CriticalValue90=criticalEigenValues_ConstantTerm[1,0].ToString(), 
+                    CriticalValue95=criticalEigenValues_ConstantTerm[1,1].ToString(),
+                    CriticalValue99=criticalEigenValues_ConstantTerm[1,2].ToString(),
                     TestStatistic="16.4"
                 }
             };
@@ -64,16 +91,16 @@ namespace StrategyTester.TimeSeries.Tests
             { 
                 new MaxEigenData(){ 
                      No="0", 
-                    CriticalValue90=criticalEigenValues[0,0].ToString(), 
-                    CriticalValue95=criticalEigenValues[0,1].ToString(),
-                    CriticalValue99=criticalEigenValues[0,2].ToString(),
+                    CriticalValue90=criticalEigenValues_ConstantTerm[0,0].ToString(), 
+                    CriticalValue95=criticalEigenValues_ConstantTerm[0,1].ToString(),
+                    CriticalValue99=criticalEigenValues_ConstantTerm[0,2].ToString(),
                     TestStatistic="3.1"
                 },
                 new MaxEigenData(){ 
                     No="1", 
-                    CriticalValue90=criticalEigenValues[1,0].ToString(), 
-                    CriticalValue95=criticalEigenValues[1,1].ToString(),
-                    CriticalValue99=criticalEigenValues[1,2].ToString(),
+                    CriticalValue90=criticalEigenValues_ConstantTerm[1,0].ToString(), 
+                    CriticalValue95=criticalEigenValues_ConstantTerm[1,1].ToString(),
+                    CriticalValue99=criticalEigenValues_ConstantTerm[1,2].ToString(),
                     TestStatistic="11.4"
                 }
             };
@@ -90,16 +117,16 @@ namespace StrategyTester.TimeSeries.Tests
             { 
                 new MaxEigenData(){ 
                      No="0", 
-                    CriticalValue90=criticalEigenValues[0,0].ToString(), 
-                    CriticalValue95=criticalEigenValues[0,1].ToString(),
-                    CriticalValue99=criticalEigenValues[0,2].ToString(),
+                    CriticalValue90=criticalEigenValues_ConstantTerm[0,0].ToString(), 
+                    CriticalValue95=criticalEigenValues_ConstantTerm[0,1].ToString(),
+                    CriticalValue99=criticalEigenValues_ConstantTerm[0,2].ToString(),
                     TestStatistic="128.3"
                 },
                 new MaxEigenData(){ 
                     No="1", 
-                    CriticalValue90=criticalEigenValues[1,0].ToString(), 
-                    CriticalValue95=criticalEigenValues[1,1].ToString(),
-                    CriticalValue99=criticalEigenValues[1,2].ToString(),
+                    CriticalValue90=criticalEigenValues_ConstantTerm[1,0].ToString(), 
+                    CriticalValue95=criticalEigenValues_ConstantTerm[1,1].ToString(),
+                    CriticalValue99=criticalEigenValues_ConstantTerm[1,2].ToString(),
                     TestStatistic="11.4"
                 }
             };
@@ -116,23 +143,23 @@ namespace StrategyTester.TimeSeries.Tests
             { 
                 new MaxEigenData(){ 
                      No="0", 
-                    CriticalValue90=criticalEigenValues[0,0].ToString(), 
-                    CriticalValue95=criticalEigenValues[0,1].ToString(),
-                    CriticalValue99=criticalEigenValues[0,2].ToString(),
+                    CriticalValue90=criticalEigenValues_ConstantTerm[0,0].ToString(), 
+                    CriticalValue95=criticalEigenValues_ConstantTerm[0,1].ToString(),
+                    CriticalValue99=criticalEigenValues_ConstantTerm[0,2].ToString(),
                     TestStatistic="3"
                 },
                 new MaxEigenData(){ 
                      No="1", 
-                    CriticalValue90=criticalEigenValues[1,0].ToString(), 
-                    CriticalValue95=criticalEigenValues[1,1].ToString(),
-                    CriticalValue99=criticalEigenValues[1,2].ToString(),
+                    CriticalValue90=criticalEigenValues_ConstantTerm[1,0].ToString(), 
+                    CriticalValue95=criticalEigenValues_ConstantTerm[1,1].ToString(),
+                    CriticalValue99=criticalEigenValues_ConstantTerm[1,2].ToString(),
                     TestStatistic="8.4"
                 },
                 new MaxEigenData(){ 
                     No="2", 
-                    CriticalValue90=criticalEigenValues[2,0].ToString(), 
-                    CriticalValue95=criticalEigenValues[2,1].ToString(),
-                    CriticalValue99=criticalEigenValues[2,2].ToString(),
+                    CriticalValue90=criticalEigenValues_ConstantTerm[2,0].ToString(), 
+                    CriticalValue95=criticalEigenValues_ConstantTerm[2,1].ToString(),
+                    CriticalValue99=criticalEigenValues_ConstantTerm[2,2].ToString(),
                     TestStatistic="11.4"
                 }
             };
@@ -149,23 +176,23 @@ namespace StrategyTester.TimeSeries.Tests
             { 
                 new MaxEigenData(){ 
                      No="0", 
-                    CriticalValue90=criticalEigenValues[0,0].ToString(), 
-                    CriticalValue95=criticalEigenValues[0,1].ToString(),
-                    CriticalValue99=criticalEigenValues[0,2].ToString(),
+                    CriticalValue90=criticalEigenValues_ConstantTerm[0,0].ToString(), 
+                    CriticalValue95=criticalEigenValues_ConstantTerm[0,1].ToString(),
+                    CriticalValue99=criticalEigenValues_ConstantTerm[0,2].ToString(),
                     TestStatistic="128.3"
                 },
                 new MaxEigenData(){ 
                      No="1", 
-                    CriticalValue90=criticalEigenValues[1,0].ToString(), 
-                    CriticalValue95=criticalEigenValues[1,1].ToString(),
-                    CriticalValue99=criticalEigenValues[1,2].ToString(),
+                    CriticalValue90=criticalEigenValues_ConstantTerm[1,0].ToString(), 
+                    CriticalValue95=criticalEigenValues_ConstantTerm[1,1].ToString(),
+                    CriticalValue99=criticalEigenValues_ConstantTerm[1,2].ToString(),
                     TestStatistic="11.4"
                 },
                 new MaxEigenData(){ 
                     No="2", 
-                    CriticalValue90=criticalEigenValues[2,0].ToString(), 
-                    CriticalValue95=criticalEigenValues[2,1].ToString(),
-                    CriticalValue99=criticalEigenValues[2,2].ToString(),
+                    CriticalValue90=criticalEigenValues_ConstantTerm[2,0].ToString(), 
+                    CriticalValue95=criticalEigenValues_ConstantTerm[2,1].ToString(),
+                    CriticalValue99=criticalEigenValues_ConstantTerm[2,2].ToString(),
                     TestStatistic="11.4"
                 }
             };
@@ -182,23 +209,23 @@ namespace StrategyTester.TimeSeries.Tests
             { 
                 new MaxEigenData(){ 
                      No="0", 
-                    CriticalValue90=criticalEigenValues[0,0].ToString(), 
-                    CriticalValue95=criticalEigenValues[0,1].ToString(),
-                    CriticalValue99=criticalEigenValues[0,2].ToString(),
+                    CriticalValue90=criticalEigenValues_ConstantTerm[0,0].ToString(), 
+                    CriticalValue95=criticalEigenValues_ConstantTerm[0,1].ToString(),
+                    CriticalValue99=criticalEigenValues_ConstantTerm[0,2].ToString(),
                     TestStatistic="128.3"
                 },
                 new MaxEigenData(){ 
                      No="1", 
-                    CriticalValue90=criticalEigenValues[1,0].ToString(), 
-                    CriticalValue95=criticalEigenValues[1,1].ToString(),
-                    CriticalValue99=criticalEigenValues[1,2].ToString(),
+                    CriticalValue90=criticalEigenValues_ConstantTerm[1,0].ToString(), 
+                    CriticalValue95=criticalEigenValues_ConstantTerm[1,1].ToString(),
+                    CriticalValue99=criticalEigenValues_ConstantTerm[1,2].ToString(),
                     TestStatistic="14.4"
                 },
                 new MaxEigenData(){ 
                     No="2", 
-                    CriticalValue90=criticalEigenValues[2,0].ToString(), 
-                    CriticalValue95=criticalEigenValues[2,1].ToString(),
-                    CriticalValue99=criticalEigenValues[2,2].ToString(),
+                    CriticalValue90=criticalEigenValues_ConstantTerm[2,0].ToString(), 
+                    CriticalValue95=criticalEigenValues_ConstantTerm[2,1].ToString(),
+                    CriticalValue99=criticalEigenValues_ConstantTerm[2,2].ToString(),
                     TestStatistic="11.4"
                 }
             };
@@ -215,23 +242,23 @@ namespace StrategyTester.TimeSeries.Tests
             { 
                 new MaxEigenData(){ 
                      No="0", 
-                    CriticalValue90=criticalEigenValues[0,0].ToString(), 
-                    CriticalValue95=criticalEigenValues[0,1].ToString(),
-                    CriticalValue99=criticalEigenValues[0,2].ToString(),
+                    CriticalValue90=criticalEigenValues_ConstantTerm[0,0].ToString(), 
+                    CriticalValue95=criticalEigenValues_ConstantTerm[0,1].ToString(),
+                    CriticalValue99=criticalEigenValues_ConstantTerm[0,2].ToString(),
                     TestStatistic="128.3"
                 },
                 new MaxEigenData(){ 
                      No="1", 
-                    CriticalValue90=criticalEigenValues[1,0].ToString(), 
-                    CriticalValue95=criticalEigenValues[1,1].ToString(),
-                    CriticalValue99=criticalEigenValues[1,2].ToString(),
+                    CriticalValue90=criticalEigenValues_ConstantTerm[1,0].ToString(), 
+                    CriticalValue95=criticalEigenValues_ConstantTerm[1,1].ToString(),
+                    CriticalValue99=criticalEigenValues_ConstantTerm[1,2].ToString(),
                     TestStatistic="19.4"
                 },
                 new MaxEigenData(){ 
                     No="2", 
-                    CriticalValue90=criticalEigenValues[2,0].ToString(), 
-                    CriticalValue95=criticalEigenValues[2,1].ToString(),
-                    CriticalValue99=criticalEigenValues[2,2].ToString(),
+                    CriticalValue90=criticalEigenValues_ConstantTerm[2,0].ToString(), 
+                    CriticalValue95=criticalEigenValues_ConstantTerm[2,1].ToString(),
+                    CriticalValue99=criticalEigenValues_ConstantTerm[2,2].ToString(),
                     TestStatistic="11.4"
                 }
             };
@@ -251,6 +278,21 @@ namespace StrategyTester.TimeSeries.Tests
             double[,] eigenVecMatrix = null;
             JohansenHelper.DoMaxEigenValueTest(johSeries, nlags, out outStats,
                 out eigenValuesVec, out eigenVecMatrix);
+
+            //TestStatistics
+            Assert.LessOrEqual(Math.Abs(double.Parse(outStats[0].TestStatistic) - 15.9792517028082), double.Epsilon);
+            Assert.LessOrEqual(Math.Abs(double.Parse(outStats[1].TestStatistic) - 0.049406090533334), double.Epsilon);
+
+            //EigenValues
+            Assert.LessOrEqual(Math.Abs(eigenValuesVec[0] - 0.15632846729163868), double.Epsilon);
+            Assert.LessOrEqual(Math.Abs(eigenValuesVec[1] - 0.00052545860604814865), double.Epsilon);
+
+            //EigenVectorMatrix
+            Assert.LessOrEqual(Math.Abs(eigenVecMatrix[0, 0] - 0.47732800049680169), double.Epsilon);
+            Assert.LessOrEqual(Math.Abs(eigenVecMatrix[0, 1] - 0.282698949919729), double.Epsilon);
+            Assert.LessOrEqual(Math.Abs(eigenVecMatrix[1, 0] - -0.87872520160840129), double.Epsilon);
+            Assert.LessOrEqual(Math.Abs(eigenVecMatrix[1, 1] - 0.95920868621707267), double.Epsilon);
+
         }
 
         List<double[]> GetInputVectors()
