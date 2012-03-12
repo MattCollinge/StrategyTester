@@ -10,3 +10,10 @@ C:\Dev\Trading\StrategyTester\src\StrategyTester\EoDDataLoader\obj\x86\Release\E
 C:\Dev\Trading\StrategyTester\src\StrategyTester\EoDDataLoader\bin\Release\EoDDataLoader.exe.config
 C:\Dev\Trading\StrategyTester\src\StrategyTester\EoDDataLoader\bin\Release\log4net.dll
 C:\Dev\Trading\StrategyTester\src\StrategyTester\EoDDataLoader\bin\Release\log4net.xml
+C:\Dev\Trading\StrategyTester\src\bin\Release\EoDDataLoader.exe.config
+C:\Dev\Trading\StrategyTester\bin\Release\EoDDataLoader.exe.config
+C:\Dev\Trading\StrategyTester\bin\EODDataLoader\EoDDataLoader.exe.config
+C:\Dev\Trading\StrategyTester\bin\EODDataLoader\EoDDataLoader.exe
+C:\Dev\Trading\StrategyTester\bin\EODDataLoader\EoDDataLoader.pdb
+C:\Dev\Trading\StrategyTester\bin\EODDataLoader\libgslcblas_d.dll
+C:\Dev\Trading\StrategyTester\bin\EODDataLoader\libgsl_d.dll

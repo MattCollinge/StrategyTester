@@ -5,8 +5,10 @@ using System.Text;
 
 namespace StrategyTester.TimeSeries
 {
-    interface IStoreOHLCVIntervals
+    public interface IStoreOHLCVIntervals
     {
-       // OHLCVInterval Get
+         IEnumerable<OHLCVInterval> GetByTimeSpan(string instrument, DateTime from, DateTime to);
+         void Save(OHLCVInterval intervalToSave);
+    
     }
 }

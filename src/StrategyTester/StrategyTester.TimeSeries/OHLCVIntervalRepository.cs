@@ -8,7 +8,7 @@ using MongoDB.Bson.Serialization;
 
 namespace StrategyTester.TimeSeries
 {
-   public class OHLCVIntervalRepository
+   public class OHLCVIntervalRepository : IStoreOHLCVIntervals 
     {
        private static MongoServer server;
        private static MongoDatabase db;

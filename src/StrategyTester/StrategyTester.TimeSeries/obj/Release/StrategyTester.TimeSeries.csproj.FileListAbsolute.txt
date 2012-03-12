@@ -13,3 +13,7 @@ C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries\obj\R
 C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries\obj\Release\StrategyTester.TimeSeries.pdb
 C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries\bin\Release\log4net.dll
 C:\Dev\Trading\StrategyTester\src\StrategyTester\StrategyTester.TimeSeries\bin\Release\log4net.xml
+C:\Dev\Trading\StrategyTester\bin\TimeSeries\StrategyTester.TimeSeries.dll
+C:\Dev\Trading\StrategyTester\bin\TimeSeries\StrategyTester.TimeSeries.pdb
+C:\Dev\Trading\StrategyTester\bin\TimeSeries\libgslcblas_d.dll
+C:\Dev\Trading\StrategyTester\bin\TimeSeries\libgsl_d.dll

@@ -5,14 +5,72 @@ using System.Text;
 
 namespace StrategyTester.TimeSeries.Stats
 {
-    class TripletAnalyser
+    public class TripletAnalyser
     {
-       public double[] PerformAnalysis(IList<string> symbols, DateTime minDate, DateTime maxDate)
-       {
-            //Get Symbol data for period
-                    //If one symbol has less data trim all symbols samples to lowest count
-           List<double[]> johSeries = new List<double[]>();
+        class OHLCVIntervalDateComparer : IEqualityComparer<OHLCVInterval>
+        {
+            public bool Equals(OHLCVInterval x, OHLCVInterval y)
+            {
+                //Check whether the compared objects reference the same data.
+                if (Object.ReferenceEquals(x, y)) return true;
 
+                //Check whether any of the compared objects is null.
+                if (Object.ReferenceEquals(x, null) || Object.ReferenceEquals(y, null))
+                    return false;
+
+                //Check whether the products' properties are equal.
+                return x.DateTime == y.DateTime;
+            }
+
+            // If Equals() returns true for a pair of objects 
+            // then GetHashCode() must return the same value for these objects.
+            public int GetHashCode(OHLCVInterval obj)
+            {
+                //Check whether the object is null
+                if (Object.ReferenceEquals(obj, null)) return 0;
+
+                //Get hash code for the DateTime field if it is not null.
+                return obj.DateTime == null ? 0 : obj.DateTime.GetHashCode();
+            }
+        }
+
+        public List<double[]> PrepareInputSeries(IList<string> symbols, DateTime minDate, DateTime maxDate, IStoreOHLCVIntervals repository)
+        {
+            List<double[]> inputSeries = new List<double[]>();
+            Dictionary<string, List<OHLCVInterval>> tmpData = new Dictionary<string, List<OHLCVInterval>>();
+
+            //For each Symbol attempt to get data from minDate to maxDate
+            //Work out the largest inclusive range
+            long minDateTicks = 0;
+            long maxDateTicks = long.MaxValue;
+            foreach (var symbol in symbols)
+            {
+               List<OHLCVInterval> symbolSeries = repository.GetByTimeSpan(symbol, minDate, maxDate).ToList();
+
+               tmpData.Add(symbol, symbolSeries);
+
+               minDateTicks  = Math.Max(minDateTicks,symbolSeries.Min<OHLCVInterval>(interval => interval.DateTime.Ticks));
+               maxDateTicks = Math.Min(maxDateTicks, symbolSeries.Max<OHLCVInterval>(interval => interval.DateTime.Ticks));
+
+            }
+
+            //combine in list
+            foreach (var symbol in symbols)
+            {
+                inputSeries.Add(tmpData[symbol]
+                    .Where<OHLCVInterval>(interval => interval.DateTime.Ticks >= minDateTicks && interval.DateTime.Ticks <= maxDateTicks)
+                    .Select<OHLCVInterval, double>(interval => interval.Close)
+                    .ToArray<double>()
+                );
+            }
+            
+            //return
+            return inputSeries;
+        }
+
+        public double[] PerformAnalysis(List<double[]> johSeries)
+       {
+      
             int nlags = 5;
             List<MaxEigenData> outStats = null;
             double[] eigenValuesVec = null;

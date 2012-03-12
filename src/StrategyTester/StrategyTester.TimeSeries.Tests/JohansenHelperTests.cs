@@ -11,6 +11,8 @@ namespace StrategyTester.TimeSeries.Tests
     [TestFixture]
     public class JohansenHelperTests
     {
+        #region criticalEigenValues
+        
         double[,] criticalEigenValues_ConstantTerm = new double[,]{
             {2.7055,	3.8415,	    6.6349},
             {12.2971,	14.2639,	18.52},
@@ -51,6 +53,8 @@ namespace StrategyTester.TimeSeries.Tests
             {57.7954,	61.0404,	67.6415},
             {63.7248,	67.0756,	73.8856},
             {69.6513,	73.0946,	80.0937}};
+
+        #endregion
 
         [Test]
         public void GetSignificantEigenValuesFor2EigenStats()
