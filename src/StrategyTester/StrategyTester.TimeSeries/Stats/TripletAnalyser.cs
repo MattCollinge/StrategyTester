@@ -7,34 +7,8 @@ namespace StrategyTester.TimeSeries.Stats
 {
     public class TripletAnalyser
     {
-        class OHLCVIntervalDateComparer : IEqualityComparer<OHLCVInterval>
-        {
-            public bool Equals(OHLCVInterval x, OHLCVInterval y)
-            {
-                //Check whether the compared objects reference the same data.
-                if (Object.ReferenceEquals(x, y)) return true;
-
-                //Check whether any of the compared objects is null.
-                if (Object.ReferenceEquals(x, null) || Object.ReferenceEquals(y, null))
-                    return false;
-
-                //Check whether the products' properties are equal.
-                return x.DateTime == y.DateTime;
-            }
-
-            // If Equals() returns true for a pair of objects 
-            // then GetHashCode() must return the same value for these objects.
-            public int GetHashCode(OHLCVInterval obj)
-            {
-                //Check whether the object is null
-                if (Object.ReferenceEquals(obj, null)) return 0;
-
-                //Get hash code for the DateTime field if it is not null.
-                return obj.DateTime == null ? 0 : obj.DateTime.GetHashCode();
-            }
-        }
-
-        public List<double[]> PrepareInputSeries(IList<string> symbols, DateTime minDate, DateTime maxDate, IStoreOHLCVIntervals repository)
+   
+      public List<double[]> PrepareInputSeries(IList<string> symbols, DateTime minDate, DateTime maxDate, IStoreOHLCVIntervals repository)
         {
             List<double[]> inputSeries = new List<double[]>();
             Dictionary<string, List<OHLCVInterval>> tmpData = new Dictionary<string, List<OHLCVInterval>>();
@@ -68,7 +42,7 @@ namespace StrategyTester.TimeSeries.Stats
             return inputSeries;
         }
 
-        public double[] PerformAnalysis(List<double[]> johSeries)
+      public double[] PerformAnalysis(List<double[]> johSeries)
        {
       
             int nlags = 5;
@@ -122,7 +96,7 @@ namespace StrategyTester.TimeSeries.Stats
            return avgEigenValue;
        }
 
-       List<List<double[]>> SplitSeries(List<double[]> series, int maxlen)
+      public List<List<double[]>> SplitSeries(List<double[]> series, int maxlen)
        {
            List<List<double[]>> retList = new List<List<double[]>>();
            //if (maxlen > series[0].Length)

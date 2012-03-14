@@ -12,44 +12,56 @@ namespace StrategyTester.TimeSeries.Tests
     public class TripletAnalyserTests
     {
         [Test]
-        [Ignore]
         public void PerformAnalysis()
         {
             TripletAnalyser tripletAnalyser = new TripletAnalyser();
-            IList<string> symbolList = new List<string>();
-            DateTime minDate = DateTime.MinValue;
-            DateTime maxDate = DateTime.MaxValue;
+           
+          double[] result =  tripletAnalyser.PerformAnalysis(GetJohnsenSeries());
+        }
 
-            MockRepository mocks = new MockRepository();
+        private List<double[]> GetJohnsenSeries()
+        {
+            int seriesLength = 500;
+            List<double[]> johnsenSeries = new List<double[]>();
+            johnsenSeries.Add(new double[seriesLength]);
+            johnsenSeries.Add(new double[seriesLength]);
+            johnsenSeries.Add(new double[seriesLength]);
+            
+            Random rnd = new Random();
+           double datapoint = 0;
 
-            IStoreOHLCVIntervals intervalRepository =  mocks.Stub<IStoreOHLCVIntervals>();
-
-            using (mocks.Record())
+            //Random walk
+            for (int i = 0; i < seriesLength; i++)
             {
-                SetupResult
-                    .For(intervalRepository.GetByTimeSpan("", minDate, maxDate))
-                     .IgnoreArguments()
-                    .Return(new List<OHLCVInterval>(){
-                        new OHLCVInterval() 
-                        {
-                             Close = 1213.27f,
-                             // DataSource="Stub",
-                               DateTime=new DateTime(2008,09,26),
-                                High=1215.77f,
-                                 Index=0,
-                                  Instrument="StubInstrument",
-                                   //Interval="Day",
-                                   Exchange="StubExchange",
-                                     Low=1187.54f,
-                                      Open=1204.47f,
-                                       Volume=5383610000,
-                                       //Id = Guid.NewGuid()//"StubInstrument" + new DateTime(2008,09,26).Ticks.ToString()
-                        }
-                    }
-                        );
+              datapoint = rnd.NextDouble() + -1*(int)Math.Round(rnd.NextDouble());
+                
+                if(i>0)
+                    datapoint = johnsenSeries[0][i-1] + datapoint;
+
+                johnsenSeries[0][i] = datapoint;
             }
 
-            //tripletAnalyser.PerformAnalysis(symbolList, minDate, maxDate, intervalRepository);
+            //Random Walk
+            for (int i = 0; i < seriesLength; i++)
+            {
+                datapoint = rnd.NextDouble() + -1 * (int)Math.Round(rnd.NextDouble());
+
+                if (i > 0)
+                    datapoint = johnsenSeries[1][i - 1] + datapoint;
+
+                johnsenSeries[1][i] = datapoint;
+            }
+
+            //Random walk + 0.3 of johansenSeries[0]
+            for (int i = 0; i < seriesLength; i++)
+            {
+                datapoint = rnd.NextDouble() + -1 * (int)Math.Round(rnd.NextDouble());
+
+                datapoint = datapoint + 0.3 * johnsenSeries[0][i];
+
+                johnsenSeries[2][i] = datapoint;
+            }
+            return johnsenSeries;
         }
 
         [Test]
@@ -166,7 +178,63 @@ namespace StrategyTester.TimeSeries.Tests
          
         }
 
+        [Test]
+        public void PrepareInputSeries_ThreeSeries_LastOne_StartsLater()
+        {
+            TripletAnalyser tripletAnalyser = new TripletAnalyser();
+            IList<string> symbolList = new List<string>();
+            DateTime minDate = new DateTime(2000, 1, 1);
+            DateTime maxDate = new DateTime(2001, 1, 1);
+            string symbol = "Symbol_1";
 
+            IStoreOHLCVIntervals intervalRepository = MockRepository.GenerateStub<IStoreOHLCVIntervals>();
+
+            intervalRepository.Stub(r => r.GetByTimeSpan(symbol, minDate, maxDate))
+                .Return(GenerateInputSeriesList(symbol, minDate, maxDate.Subtract(minDate).Days));
+
+            symbol = "Symbol_2";
+            intervalRepository.Stub(r => r.GetByTimeSpan(symbol, minDate, maxDate))
+                 .Return(GenerateInputSeriesList(symbol, minDate, maxDate.Subtract(minDate).Days));
+           
+            symbol = "Symbol_3";
+            intervalRepository.Stub(r => r.GetByTimeSpan(symbol, minDate, maxDate))
+                 .Return(GenerateInputSeriesList(symbol, minDate.AddDays(10), maxDate.Subtract(minDate).Days));
+
+            List<double[]> intersection = tripletAnalyser.PrepareInputSeries(new List<string>() { "Symbol_1", "Symbol_2", "Symbol_3" }, minDate, maxDate, intervalRepository);
+
+            Assert.AreEqual(3, intersection.Count);
+            Assert.AreEqual(356, intersection[0].Length);
+            Assert.AreEqual(356, intersection[1].Length);
+            Assert.AreEqual(356, intersection[2].Length);
+            Assert.LessOrEqual(Double.Epsilon, Math.Abs(minDate.AddDays(10).Ticks - intersection[0][0]));
+            Assert.LessOrEqual(Double.Epsilon, Math.Abs(maxDate.Ticks - intersection[0][355]));
+
+        }
+
+        [Test]
+        [Ignore]
+        public void SplitSeriesTest()
+        {
+          
+            TripletAnalyser tripletAnalyser = new TripletAnalyser();
+            List<double[]> seriesList = new List<double[]>();
+
+            seriesList.Add(new double[52]);
+            seriesList.Add(new double[52]);
+            seriesList.Add(new double[52]);
+
+            for (int i = 0; i < 52; i++)
+            {
+                seriesList[0][i] = i;
+                seriesList[1][i] = i * 100;
+                seriesList[2][i] = i * 1000;
+
+            }
+
+           List<List<double[]>> splitseries = tripletAnalyser.SplitSeries(seriesList, 10);
+           Assert.AreEqual(6, splitseries.Count);
+
+        }
 
         private static List<OHLCVInterval> GenerateInputSeriesList(string symbol, DateTime minDate, int count)
         {
