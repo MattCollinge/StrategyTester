@@ -14,9 +14,10 @@ namespace StrategyTester.TimeSeries.Tests
         [Test]
         public void PerformAnalysis()
         {
-            TripletAnalyser tripletAnalyser = new TripletAnalyser();
+          TripletAnalyser tripletAnalyser = new TripletAnalyser();
            
-          double[] result =  tripletAnalyser.PerformAnalysis(GetJohnsenSeries());
+          MaxEigenResults result =  tripletAnalyser.PerformAnalysis(GetJohnsenSeries());
+           
         }
 
         private List<double[]> GetJohnsenSeries()
@@ -71,19 +72,20 @@ namespace StrategyTester.TimeSeries.Tests
             IList<string> symbolList = new List<string>();
             DateTime minDate = new DateTime(2000,1,1);
             DateTime maxDate =new DateTime(2001,1,1);
+            string exchange = "Exchange";
             string symbol = "Symbol_1";
             
             IStoreOHLCVIntervals intervalRepository = MockRepository.GenerateStub<IStoreOHLCVIntervals>();
 
-            intervalRepository.Stub(r => r.GetByTimeSpan(symbol, minDate, maxDate))
+            intervalRepository.Stub(r => r.GetByTimeSpan(exchange,symbol, minDate, maxDate))
                 .Return(GenerateInputSeriesList(symbol, minDate, maxDate.Subtract(minDate).Days));
 
            symbol = "Symbol_2";
            //maxDate = maxDate.AddDays(-10);
-           intervalRepository.Stub(r => r.GetByTimeSpan(symbol, minDate, maxDate))
+           intervalRepository.Stub(r => r.GetByTimeSpan(exchange, symbol, minDate, maxDate))
                 .Return(GenerateInputSeriesList(symbol, minDate, maxDate.AddDays(-10).Subtract(minDate).Days));
 
-           List<double[]> intersection = tripletAnalyser.PrepareInputSeries(new List<string>() { "Symbol_1", "Symbol_2" }, minDate, maxDate, intervalRepository);
+           List<double[]> intersection = tripletAnalyser.PrepareInputSeries(new List<string>() { "Exchange:Symbol_1", "Exchange:Symbol_2" }, minDate, maxDate, intervalRepository);
 
            Assert.AreEqual(2, intersection.Count);
            Assert.AreEqual(356, intersection[0].Length);
@@ -101,18 +103,19 @@ namespace StrategyTester.TimeSeries.Tests
             IList<string> symbolList = new List<string>();
             DateTime minDate = new DateTime(2000, 1, 1);
             DateTime maxDate = new DateTime(2001, 1, 1);
+            string exchange = "Exchange";
             string symbol = "Symbol_1";
 
             IStoreOHLCVIntervals intervalRepository = MockRepository.GenerateStub<IStoreOHLCVIntervals>();
 
-            intervalRepository.Stub(r => r.GetByTimeSpan(symbol, minDate, maxDate))
+            intervalRepository.Stub(r => r.GetByTimeSpan(exchange,symbol, minDate, maxDate))
                 .Return(GenerateInputSeriesList(symbol, minDate, maxDate.Subtract(minDate).Days));
 
             symbol = "Symbol_2";
-            intervalRepository.Stub(r => r.GetByTimeSpan(symbol, minDate, maxDate))
+            intervalRepository.Stub(r => r.GetByTimeSpan(exchange, symbol, minDate, maxDate))
                  .Return(GenerateInputSeriesList(symbol, minDate, maxDate.AddDays(10).Subtract(minDate).Days));
 
-            List<double[]> intersection = tripletAnalyser.PrepareInputSeries(new List<string>() { "Symbol_1", "Symbol_2" }, minDate, maxDate, intervalRepository);
+            List<double[]> intersection = tripletAnalyser.PrepareInputSeries(new List<string>() { "Exchange:Symbol_1", "Exchange:Symbol_2" }, minDate, maxDate, intervalRepository);
 
             Assert.AreEqual(2, intersection.Count);
             Assert.AreEqual(366, intersection[0].Length);
@@ -129,18 +132,19 @@ namespace StrategyTester.TimeSeries.Tests
             IList<string> symbolList = new List<string>();
             DateTime minDate = new DateTime(2000, 1, 1);
             DateTime maxDate = new DateTime(2001, 1, 1);
+            string exchange = "Exchange";
             string symbol = "Symbol_1";
 
             IStoreOHLCVIntervals intervalRepository = MockRepository.GenerateStub<IStoreOHLCVIntervals>();
 
-            intervalRepository.Stub(r => r.GetByTimeSpan(symbol, minDate, maxDate))
+            intervalRepository.Stub(r => r.GetByTimeSpan(exchange,symbol, minDate, maxDate))
                 .Return(GenerateInputSeriesList(symbol, minDate.AddDays(10), maxDate.Subtract(minDate).Days));
 
             symbol = "Symbol_2";
-            intervalRepository.Stub(r => r.GetByTimeSpan(symbol, minDate, maxDate))
+            intervalRepository.Stub(r => r.GetByTimeSpan(exchange, symbol, minDate, maxDate))
                  .Return(GenerateInputSeriesList(symbol, minDate, maxDate.Subtract(minDate).Days));
 
-            List<double[]> intersection = tripletAnalyser.PrepareInputSeries(new List<string>() { "Symbol_1", "Symbol_2" }, minDate, maxDate, intervalRepository);
+            List<double[]> intersection = tripletAnalyser.PrepareInputSeries(new List<string>() { "Exchange:Symbol_1", "Exchange:Symbol_2" }, minDate, maxDate, intervalRepository);
 
             Assert.AreEqual(2, intersection.Count);
             Assert.AreEqual(356, intersection[0].Length);
@@ -157,18 +161,19 @@ namespace StrategyTester.TimeSeries.Tests
             IList<string> symbolList = new List<string>();
             DateTime minDate = new DateTime(2000, 1, 1);
             DateTime maxDate = new DateTime(2001, 1, 1);
+            string exchange = "Exchange";
             string symbol = "Symbol_1";
 
             IStoreOHLCVIntervals intervalRepository = MockRepository.GenerateStub<IStoreOHLCVIntervals>();
 
-            intervalRepository.Stub(r => r.GetByTimeSpan(symbol, minDate, maxDate))
+            intervalRepository.Stub(r => r.GetByTimeSpan(exchange,symbol, minDate, maxDate))
                 .Return(GenerateInputSeriesList(symbol, minDate, maxDate.Subtract(minDate).Days));
 
             symbol = "Symbol_2";
-            intervalRepository.Stub(r => r.GetByTimeSpan(symbol, minDate, maxDate))
+            intervalRepository.Stub(r => r.GetByTimeSpan(exchange,symbol, minDate, maxDate))
                  .Return(GenerateInputSeriesList(symbol, minDate.AddDays(10), maxDate.Subtract(minDate).Days));
 
-            List<double[]> intersection = tripletAnalyser.PrepareInputSeries(new List<string>() { "Symbol_1", "Symbol_2" }, minDate, maxDate, intervalRepository);
+            List<double[]> intersection = tripletAnalyser.PrepareInputSeries(new List<string>() { "Exchange:Symbol_1", "Exchange:Symbol_2" }, minDate, maxDate, intervalRepository);
 
             Assert.AreEqual(2, intersection.Count);
             Assert.AreEqual(356, intersection[0].Length);
@@ -185,22 +190,23 @@ namespace StrategyTester.TimeSeries.Tests
             IList<string> symbolList = new List<string>();
             DateTime minDate = new DateTime(2000, 1, 1);
             DateTime maxDate = new DateTime(2001, 1, 1);
+            string exchange = "Exchange";
             string symbol = "Symbol_1";
 
             IStoreOHLCVIntervals intervalRepository = MockRepository.GenerateStub<IStoreOHLCVIntervals>();
 
-            intervalRepository.Stub(r => r.GetByTimeSpan(symbol, minDate, maxDate))
+            intervalRepository.Stub(r => r.GetByTimeSpan(exchange, symbol, minDate, maxDate))
                 .Return(GenerateInputSeriesList(symbol, minDate, maxDate.Subtract(minDate).Days));
 
             symbol = "Symbol_2";
-            intervalRepository.Stub(r => r.GetByTimeSpan(symbol, minDate, maxDate))
+            intervalRepository.Stub(r => r.GetByTimeSpan(exchange, symbol, minDate, maxDate))
                  .Return(GenerateInputSeriesList(symbol, minDate, maxDate.Subtract(minDate).Days));
            
             symbol = "Symbol_3";
-            intervalRepository.Stub(r => r.GetByTimeSpan(symbol, minDate, maxDate))
+            intervalRepository.Stub(r => r.GetByTimeSpan(exchange, symbol, minDate, maxDate))
                  .Return(GenerateInputSeriesList(symbol, minDate.AddDays(10), maxDate.Subtract(minDate).Days));
 
-            List<double[]> intersection = tripletAnalyser.PrepareInputSeries(new List<string>() { "Symbol_1", "Symbol_2", "Symbol_3" }, minDate, maxDate, intervalRepository);
+            List<double[]> intersection = tripletAnalyser.PrepareInputSeries(new List<string>() { "Exchange:Symbol_1", "Exchange:Symbol_2", "Exchange:Symbol_3" }, minDate, maxDate, intervalRepository);
 
             Assert.AreEqual(3, intersection.Count);
             Assert.AreEqual(356, intersection[0].Length);

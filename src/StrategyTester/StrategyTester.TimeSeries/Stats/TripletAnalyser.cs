@@ -19,7 +19,8 @@ namespace StrategyTester.TimeSeries.Stats
             long maxDateTicks = long.MaxValue;
             foreach (var symbol in symbols)
             {
-               List<OHLCVInterval> symbolSeries = repository.GetByTimeSpan(symbol, minDate, maxDate).ToList();
+                string[] symbolSplit = symbol.Split(":".ToCharArray());
+                List<OHLCVInterval> symbolSeries = repository.GetByTimeSpan(symbolSplit[0],symbolSplit[1], minDate, maxDate).ToList();
 
                tmpData.Add(symbol, symbolSeries);
 
@@ -42,58 +43,54 @@ namespace StrategyTester.TimeSeries.Stats
             return inputSeries;
         }
 
-      public double[] PerformAnalysis(List<double[]> johSeries)
+      public MaxEigenResults PerformAnalysis(List<double[]> johSeries)
        {
+          //TODO: Change return type to Return a view as to the pair ratio and half life if conintegrating...
       
             int nlags = 5;
-            List<MaxEigenData> outStats = null;
-            double[] eigenValuesVec = null;
-            double[,] eigenVecMatrix = null;
-            JohansenHelper.DoMaxEigenValueTest(johSeries, nlags, out outStats,
-                out eigenValuesVec, out eigenVecMatrix);
-            double[] significantEvals = JohansenHelper.GetSignificantEvals(outStats,eigenValuesVec);
+            MaxEigenResults maxEigenResults = JohansenHelper.DoMaxEigenValueTest(johSeries, nlags);
+            double[] significantEvals = JohansenHelper.GetSignificantEvals(maxEigenResults.outStats, maxEigenResults.eigenValuesVec);
 
             //do not bother about cross section averaging
-            if (significantEvals.Length == 0)
-                return significantEvals;
+            //if (significantEvals.Length == 0)
+            //    return maxEigenResults;
 
             //average over the time cross sections
-            List<List<double[]>> seriesList = SplitSeries(johSeries, 252);
-            int noOfSeries = seriesList.Count;
+            //List<List<double[]>> seriesList = SplitSeries(johSeries, 252);
+            //int noOfSeries = seriesList.Count;
 
-            double[] cumEigValues = new double[significantEvals.Length];
-            for (int i = 0; i < cumEigValues.Length; i++)
-                cumEigValues[i] = 0;
-            int tmpcounter = 0;
-            for (int i = 0; i < noOfSeries; i++)
-            {
-                List<double[]> tmpSeries = seriesList[i];
-                JohansenHelper.DoMaxEigenValueTest(tmpSeries, nlags, out outStats,
-                    out eigenValuesVec, out eigenVecMatrix);
-                for (int j = 0; j < cumEigValues.Length; j++)
-                {
-                    if ((eigenValuesVec[j] <= 0) || eigenValuesVec[j] > 1)
-                    {
-                        tmpcounter = tmpcounter;
-                    }
-                    else
-                    {
-                        cumEigValues[j] += eigenValuesVec[j];
-                        tmpcounter++;
-                    }
-                }
+            //double[] cumEigValues = new double[significantEvals.Length];
+            //for (int i = 0; i < cumEigValues.Length; i++)
+            //    cumEigValues[i] = 0;
+            //int tmpcounter = 0;
+            //for (int i = 0; i < noOfSeries; i++)
+            //{
+            //    List<double[]> tmpSeries = seriesList[i];
+            //    maxEigenResults = JohansenHelper.DoMaxEigenValueTest(tmpSeries, nlags);
+            //    for (int j = 0; j < cumEigValues.Length; j++)
+            //    {
+            //        if ((maxEigenResults.eigenValuesVec[j] <= 0) || maxEigenResults.eigenValuesVec[j] > 1)
+            //        {
+            //            tmpcounter = tmpcounter;
+            //        }
+            //        else
+            //        {
+            //            cumEigValues[j] += maxEigenResults.eigenValuesVec[j];
+            //            tmpcounter++;
+            //        }
+            //    }
 
 
-                //ADFHelper.DoADFTest(tmpSeries, out dfStatistic,
-                //    out pvalue, out lagOrderUsed);
-                //cumPvalue += pvalue;
-            }
-            double[] avgEigenValue = new double[cumEigValues.Length];
-            for (int i = 0; i < cumEigValues.Length; i++)
-                avgEigenValue[i] = cumEigValues[i] / ((double)tmpcounter);
-            //return cumPvalue / ((double)noOfSeries);
-            
-           return avgEigenValue;
+            //    //ADFHelper.DoADFTest(tmpSeries, out dfStatistic,
+            //    //    out pvalue, out lagOrderUsed);
+            //    //cumPvalue += pvalue;
+            //}
+            //double[] avgEigenValue = new double[cumEigValues.Length];
+            //for (int i = 0; i < cumEigValues.Length; i++)
+            //    avgEigenValue[i] = cumEigValues[i] / ((double)tmpcounter);
+            ////return cumPvalue / ((double)noOfSeries);
+
+            return maxEigenResults;
        }
 
       public List<List<double[]>> SplitSeries(List<double[]> series, int maxlen)

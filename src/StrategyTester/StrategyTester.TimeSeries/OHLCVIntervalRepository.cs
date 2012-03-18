@@ -28,10 +28,13 @@ namespace StrategyTester.TimeSeries
            
        }
 
-       public IEnumerable<OHLCVInterval> GetByTimeSpan(string instrument, DateTime from, DateTime to)
+       public IEnumerable<OHLCVInterval> GetByTimeSpan(string exchange, string instrument, DateTime from, DateTime to)
        {
            var collection = db.GetCollection<OHLCVInterval>(collectionName); 
-           var mongoQuery = Query.GT("DateTime", from).LT(to);
+           var mongoQuery = Query.And(
+                            Query.EQ("Exchange",exchange),
+                            Query.EQ("Instrument", instrument),
+                            Query.GT("DateTime", from).LT(to));
            
            foreach (var item in collection.Find(mongoQuery))
            {

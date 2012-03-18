@@ -56,6 +56,7 @@
   <ItemGroup>
     <Compile Include="HistoricalDataLoader.cs" />
     <Compile Include="IStoreOHLCVIntervals.cs" />
+    <Compile Include="Stats\CointegrationAnalysis.cs" />
     <Compile Include="Stats\MaxEigenData.cs" />
     <Compile Include="OHLCVIntervalRepository.cs" />
     <Compile Include="Parsers\EODDataOHLVCIntervalParser.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="Parsers\YahooOHLVCIntervalParser.cs" />
     <Compile Include="Stats\GSLClass.cs" />
     <Compile Include="Stats\JohansenHelper.cs" />
+    <Compile Include="Stats\MaxEigenResults.cs" />
     <Compile Include="Stats\TripletAnalyser.cs" />
   </ItemGroup>
   <ItemGroup>

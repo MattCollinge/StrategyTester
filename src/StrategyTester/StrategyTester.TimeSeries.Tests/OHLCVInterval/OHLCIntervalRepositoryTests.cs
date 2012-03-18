@@ -24,7 +24,7 @@ namespace StrategyTester.TimeSeries.Tests
             newOHLCVInterval.Index = 0;
             //newOHLCVInterval.DataSource = "EODData";
             newOHLCVInterval.Instrument ="OHLCIntervalRepositoryTests";
-
+            newOHLCVInterval.Exchange = "FakeExchange";
           //  newOHLCVInterval.Id = Guid.NewGuid();// newOHLCVInterval.Instrument + newOHLCVInterval.DateTime.Ticks.ToString();
 
             OHLCVIntervalRepository repository = new OHLCVIntervalRepository();
@@ -36,7 +36,7 @@ namespace StrategyTester.TimeSeries.Tests
         {
 
             OHLCVIntervalRepository repository = new OHLCVIntervalRepository();
-          var intervals =  repository.GetByTimeSpan("OHLCIntervalRepositoryTests", DateTime.MinValue , DateTime.MaxValue);
+          var intervals =  repository.GetByTimeSpan("FakeExchange","OHLCIntervalRepositoryTests", DateTime.Now.AddDays(-9) , DateTime.Now);
            var intevalList = intervals.ToList<OHLCVInterval>();
            Assert.That(intevalList.Count > 0);
         }

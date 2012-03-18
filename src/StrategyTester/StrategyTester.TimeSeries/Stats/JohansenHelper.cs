@@ -93,7 +93,6 @@ namespace StrategyTester.TimeSeries.Stats
             return retList;
         }
 
-
         static double GetAverage(double[] x)
         {
             double total = 0;
@@ -109,10 +108,10 @@ namespace StrategyTester.TimeSeries.Stats
             for (int i = 0; i < maxEigStats.Count; i++)
             {
                 MaxEigenData eigData = maxEigStats[i];
-                double testStat = Convert.ToDouble(eigData.TestStatistic);
-                double critical90 = Convert.ToDouble(eigData.CriticalValue90);
-                double critical95 = Convert.ToDouble(eigData.CriticalValue95);
-                double critical99 = Convert.ToDouble(eigData.CriticalValue99);
+                double testStat = eigData.TestStatistic;
+                double critical90 = eigData.CriticalValue90;
+                double critical95 = eigData.CriticalValue95;
+                double critical99 = eigData.CriticalValue99;
                 if (testStat < critical90)
                 {
                     //we are confident about the coinegration relationship!
@@ -126,7 +125,7 @@ namespace StrategyTester.TimeSeries.Stats
                 else
                 {
                     //test in not able to decide how many coint vectors
-                    rankChoice.Add(eigData.No);
+                    rankChoice.Add(eigData.No.ToString());
                 }
             }
             if (rankChoice.Count > 0)
@@ -152,10 +151,10 @@ namespace StrategyTester.TimeSeries.Stats
             for (int i = 0; i < maxEigStats.Count; i++)
             {
                 MaxEigenData eigData = maxEigStats[i];
-                double testStat = Convert.ToDouble(eigData.TestStatistic);
-                double critical90 = Convert.ToDouble(eigData.CriticalValue90);
-                double critical95 = Convert.ToDouble(eigData.CriticalValue95);
-                double critical99 = Convert.ToDouble(eigData.CriticalValue99);
+                double testStat = eigData.TestStatistic;
+                double critical90 = eigData.CriticalValue90;
+                double critical95 = eigData.CriticalValue95;
+                double critical99 = eigData.CriticalValue99;
                 if (testStat < critical99)
                 {
                     hasCointegration = true;
@@ -176,9 +175,10 @@ namespace StrategyTester.TimeSeries.Stats
             return significantEvals.ToArray();
         }
 
-        public static void DoMaxEigenValueTest(List<double[]> xMat, int nlags, out List<MaxEigenData> outStats,
-            out double[] eigenValuesVec, out double[,] eigenVecMatrix)
+        public static MaxEigenResults DoMaxEigenValueTest(List<double[]> xMat, int nlags)
         {
+            MaxEigenResults maxEigenResults = new MaxEigenResults();
+
             IntPtr test1 = GSLHelper.ListDotNetToGSLMatrix(xMat);
             int t1 = GSL.gsl_matrix_get_size1(test1);
             int t2 = GSL.gsl_matrix_get_size2(test1);
@@ -270,28 +270,28 @@ namespace StrategyTester.TimeSeries.Stats
                                 GSL.gsl_eigen_sort_t.GSL_EIGEN_SORT_ABS_DESC);
 
 
-            eigenValuesVec = GSLHelper.GSLComplexVecToAbsDotNetVector(evalPtr);
-            eigenVecMatrix = GSLHelper.GSLComplexToAbsNetMatrix(ematPtr);
+            maxEigenResults.eigenValuesVec = GSLHelper.GSLComplexVecToAbsDotNetVector(evalPtr);
+            maxEigenResults.eigenVecMatrix = GSLHelper.GSLComplexToAbsNetMatrix(ematPtr);
             
             int nSamples = GSL.gsl_matrix_get_size1(ResidualsRegressionX);
             int nVariables = GSL.gsl_matrix_get_size2(ResidualsRegressionX);
 
-            outStats = new List<MaxEigenData>();
+            maxEigenResults.outStats = new List<MaxEigenData>();
             int counter=0;
-            for (int i = 0; i < eigenValuesVec.Length; i++)
+            for (int i = 0; i < maxEigenResults.eigenValuesVec.Length; i++)
             {
                 MaxEigenData eigData = new MaxEigenData();
-                eigData.No = i.ToString();
-                double LR_maxeigenvalue = -nSamples * Math.Log(1 - eigenValuesVec[i]);
-                eigData.TestStatistic = LR_maxeigenvalue.ToString();
-                eigData.CriticalValue90 = maxEigenCriticalvalues[nVariables - counter - 1, 0].ToString();
-                eigData.CriticalValue95 = maxEigenCriticalvalues[nVariables - counter - 1, 1].ToString();
-                eigData.CriticalValue99 = maxEigenCriticalvalues[nVariables - counter - 1, 2].ToString();
+                eigData.No = i;
+                double LR_maxeigenvalue = -nSamples * Math.Log(1 - maxEigenResults.eigenValuesVec[i]);
+                eigData.TestStatistic = LR_maxeigenvalue;
+                eigData.CriticalValue90 = maxEigenCriticalvalues[nVariables - counter - 1, 0];
+                eigData.CriticalValue95 = maxEigenCriticalvalues[nVariables - counter - 1, 1];
+                eigData.CriticalValue99 = maxEigenCriticalvalues[nVariables - counter - 1, 2];
                 counter++;
-                outStats.Add(eigData);
+                maxEigenResults.outStats.Add(eigData);
             }
             //Skk = MMYMATRIXELEMENTDIVIDE(MMYMULTIPLY(MTRANSPOSE(ResidualsRegressionX), ResidualsRegressionX), UBound(ResidualsRegressionX, 1))
-
+            return maxEigenResults;
         }
 
     }

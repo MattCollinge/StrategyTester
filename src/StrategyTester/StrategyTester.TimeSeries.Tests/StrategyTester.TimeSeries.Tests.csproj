@@ -52,14 +52,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EODDataOHLCVIntervalParserTests.cs" />
-    <Compile Include="JohansenHelperTests.cs" />
-    <Compile Include="OHLCIntervalRepositoryTests.cs" />
-    <Compile Include="OHLCVIntervalReaderTests.cs" />
-    <Compile Include="OHLCVIntervalTests.cs" />
+    <Compile Include="OHLCVInterval\EODDataOHLCVIntervalParserTests.cs" />
+    <Compile Include="Stats\JohansenHelperTests.cs" />
+    <Compile Include="OHLCVInterval\OHLCIntervalRepositoryTests.cs" />
+    <Compile Include="OHLCVInterval\OHLCVIntervalReaderTests.cs" />
+    <Compile Include="OHLCVInterval\OHLCVIntervalTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TripletAnalyserTests.cs" />
-    <Compile Include="YahooOHLCVIntervalParserTests.cs" />
+    <Compile Include="Stats\TripletAnalyserTests.cs" />
+    <Compile Include="OHLCVInterval\YahooOHLCVIntervalParserTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -71,10 +71,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="libgslcblas_d.dll">
+    <Content Include="Stats\libgslcblas_d.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="libgsl_d.dll">
+    <Content Include="Stats\libgsl_d.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

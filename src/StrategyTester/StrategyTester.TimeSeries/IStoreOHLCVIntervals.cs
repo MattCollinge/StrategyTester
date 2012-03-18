@@ -7,7 +7,7 @@ namespace StrategyTester.TimeSeries
 {
     public interface IStoreOHLCVIntervals
     {
-         IEnumerable<OHLCVInterval> GetByTimeSpan(string instrument, DateTime from, DateTime to);
+         IEnumerable<OHLCVInterval> GetByTimeSpan(string exchange, string instrument, DateTime from, DateTime to);
          void Save(OHLCVInterval intervalToSave);
     
     }

@@ -18,3 +18,5 @@ C:\Dev\Trading\StrategyTester\bin\TimeSeries.Tests\StrategyTester.TimeSeries.Tes
 C:\Dev\Trading\StrategyTester\bin\TimeSeries.Tests\StrategyTester.TimeSeries.Tests.pdb
 C:\Dev\Trading\StrategyTester\bin\TimeSeries.Tests\libgslcblas_d.dll
 C:\Dev\Trading\StrategyTester\bin\TimeSeries.Tests\libgsl_d.dll
+C:\Dev\Trading\StrategyTester\bin\TimeSeries.Tests\Stats\libgslcblas_d.dll
+C:\Dev\Trading\StrategyTester\bin\TimeSeries.Tests\Stats\libgsl_d.dll

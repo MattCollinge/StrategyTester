@@ -7,10 +7,10 @@ namespace StrategyTester.TimeSeries.Stats
 {
     public class MaxEigenData
     {
-        public string No { get; set; }
-        public string TestStatistic { get; set; }
-        public string CriticalValue90 { get; set; }
-        public string CriticalValue95 { get; set; }
-        public string CriticalValue99 { get; set; }
+        public int No { get; set; }
+        public double TestStatistic { get; set; }
+        public double CriticalValue90 { get; set; }
+        public double CriticalValue95 { get; set; }
+        public double CriticalValue99 { get; set; }
     }
 }
